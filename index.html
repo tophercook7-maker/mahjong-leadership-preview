@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maureen A. Cahill — Ancient Game. Modern Leadership.</title>
+<meta name="description" content="Leadership. Simplified. Timeless lessons from the Mahjong table — executive coaching, speaking, and facilitation by Maureen A. Cahill.">
+<meta name="robots" content="noindex, nofollow, noarchive"><!-- private preview: keep out of search -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#F5F1E7; --ivory-2:#EFE9DA; --ink:#1C2A3A;
+  --navy:#1B3A5B; --green:#2E5A3E; --red:#A02820; --gold:#B08D57;
+  --muted:#6b6456; --line:#dcd3bf;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ivory);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.1}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.btn{display:inline-block;padding:13px 28px;border-radius:2px;font-weight:600;font-size:.85rem;letter-spacing:.04em;transition:.2s;cursor:pointer;border:1px solid transparent}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:#12293f}
+.btn-ghost{border-color:var(--navy);color:var(--navy)}
+.btn-ghost:hover{background:var(--navy);color:#fff}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{filter:brightness(1.08)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(245,241,231,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;letter-spacing:.02em;color:var(--navy)}
+.brand span{color:var(--red)}
+.navlinks{display:flex;gap:30px;align-items:center}
+.navlinks a{font-size:.82rem;letter-spacing:.03em;color:var(--ink);opacity:.8}
+.navlinks a:hover{opacity:1;color:var(--navy)}
+@media(max-width:860px){.navlinks a:not(.btn){display:none}}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:90px 0 70px}
+.enso{position:absolute;top:-8%;right:-6%;width:560px;height:560px;border-radius:50%;
+  border:34px solid rgba(176,141,87,.13);border-right-color:rgba(176,141,87,.04);border-bottom-color:rgba(176,141,87,.04);
+  transform:rotate(-18deg);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center}
+.hero h1{font-size:clamp(2.6rem,6vw,4.4rem);margin:18px 0 6px}
+.hero h1 .navy{color:var(--navy)} .hero h1 .green{color:var(--green)}
+.hero .sub{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold);font-style:italic;margin-bottom:22px}
+.hero p.lead{font-size:1.05rem;color:var(--muted);max-width:34ch;margin-bottom:30px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+.cover-wrap{position:relative;text-align:center}
+.cover-wrap img{width:min(330px,80%);box-shadow:0 30px 60px -20px rgba(28,42,58,.45);border-radius:3px;transform:rotate(2deg);transition:.4s}
+.cover-wrap img:hover{transform:rotate(0) translateY(-6px)}
+.soon-badge{position:absolute;top:6px;left:50%;transform:translateX(-70px) rotate(2deg);z-index:2;background:var(--red);color:#fff;
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:6px 14px;border-radius:20px;box-shadow:0 8px 18px -6px rgba(160,40,32,.6)}
+/* launch band */
+.launch-band{background:linear-gradient(160deg,#1B3A5B,#12293f);color:#fff}
+.signup{display:flex;gap:10px;justify-content:center;max-width:460px;margin:26px auto 0;flex-wrap:wrap}
+.signup input{flex:1;min-width:220px;padding:14px 18px;border-radius:3px;border:1px solid #40566e;background:#0f2338;color:#fff;font-size:.95rem}
+.signup input::placeholder{color:#7f8da8}
+.signup input:focus{outline:none;border-color:var(--gold)}
+.signup-ok{display:none;margin-top:18px;color:#bfe3c6;font-weight:500}
+.signup-ok.show{display:block}
+@media(max-width:820px){.hero .wrap{grid-template-columns:1fr;text-align:center}.hero p.lead{margin-inline:auto}.hero .cta{justify-content:center}.cover-wrap{order:-1;margin-bottom:20px}}
+
+/* SECTIONS */
+section.band{padding:84px 0}
+.band.alt{background:var(--ivory-2)}
+.band.dark{background:var(--navy);color:#f3efe4}
+.center{text-align:center}
+.section-head{max-width:640px;margin:0 auto 46px}
+.section-head h2{font-size:clamp(2rem,4vw,2.8rem);margin:10px 0}
+.section-head.dark h2,.band.dark h2{color:#fff}
+.section-head p{color:var(--muted);font-size:1.05rem}
+.band.dark .section-head p{color:#c9d3dd}
+
+/* TEASER GAME */
+.game-stage{background:linear-gradient(160deg,#22432b,#173021);border-radius:14px;padding:34px 26px 30px;
+  box-shadow:inset 0 2px 40px rgba(0,0,0,.35),0 26px 50px -24px rgba(0,0,0,.6);position:relative;overflow:hidden}
+.game-stage::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0,rgba(255,255,255,.06),transparent 60%)}
+.game-head{position:relative;text-align:center;color:#f3efe4;margin-bottom:8px}
+.game-head h3{font-size:2rem;color:#fff}
+.game-head p{color:#cdbf9e;font-size:.95rem;margin-top:4px}
+.hand-counter{display:inline-block;margin-top:12px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:#e9dcbb;border:1px solid rgba(233,220,187,.35);padding:6px 16px;border-radius:20px}
+.phases{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
+@media(max-width:820px){.phases{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.phases{grid-template-columns:1fr}}
+.phase h4{color:#e9dcbb;font-family:'Cormorant Garamond',serif;font-size:1.15rem;text-align:center;margin-bottom:12px;font-weight:600;letter-spacing:.02em}
+.phase .ph-sub{display:block;font-family:'Inter';font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#9db08f;margin-bottom:2px}
+.tiles{display:flex;flex-direction:column;gap:12px}
+.tile{position:relative;height:96px;perspective:800px;cursor:pointer}
+.tile-inner{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.tile.flipped .tile-inner{transform:rotateY(180deg)}
+.tile-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:8px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;padding:8px;
+  background:linear-gradient(#fbf8f0,#efe7d4);box-shadow:0 4px 0 #cbbfa4,0 8px 14px rgba(0,0,0,.4);border:1px solid #e6dcc4}
+.tile-face .num{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--red);font-weight:700;line-height:1}
+.tile-face .t-title{font-size:.72rem;font-weight:600;color:var(--navy);margin-top:4px;line-height:1.2}
+.tile-face .hint{font-size:.6rem;color:#fff;background:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-top:6px;padding:2px 8px;border-radius:10px;font-weight:600}
+/* pulse the tappable tiles once the game starts */
+.phases.active .tile:not(.flipped):not(.locked) .tile-inner{animation:tilepulse 1.8s ease-in-out infinite}
+.phases.active .tile:not(.flipped):not(.locked):hover .tile-inner{animation:none}
+@keyframes tilepulse{0%,100%{box-shadow:0 0 0 0 rgba(233,220,187,0)}50%{box-shadow:0 0 0 4px rgba(233,220,187,.5)}}
+.start-btn{margin-top:22px;background:var(--red);color:#fff;border:none;padding:15px 34px;border-radius:3px;font-weight:600;
+  font-size:1rem;letter-spacing:.04em;cursor:pointer;opacity:0;animation:rise .9s 1.1s forwards;box-shadow:0 12px 26px -10px rgba(160,40,32,.7)}
+.start-btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.tap-cue{color:#ffe;font-weight:500;animation:cueblink 1.6s ease-in-out infinite}
+@keyframes cueblink{0%,100%{opacity:.6}50%{opacity:1}}
+.tile-back{transform:rotateY(180deg);background:linear-gradient(#1f3d29,#16301f);border:1px solid #3c6b48;box-shadow:0 4px 0 #0e2115,0 8px 14px rgba(0,0,0,.4)}
+.tile-back .t-title{color:#f3efe4;font-size:.72rem;font-weight:700;margin-bottom:4px}
+.tile-back .tip{color:#d8e2cf;font-size:.62rem;line-height:1.4}
+.tile.locked .tile-face{filter:saturate(.5) brightness(.94)}
+.tile.locked .lock{position:absolute;top:6px;right:8px;font-size:.8rem;opacity:.5}
+.tile.disabled{cursor:not-allowed}
+.game-cta{position:relative;text-align:center;margin-top:30px}
+.game-cta .msg{color:#f3efe4;font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:16px;font-style:italic;min-height:1.4em}
+.end-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.again-btn{background:transparent;color:#e9dcbb;border:1px solid rgba(233,220,187,.5)}
+.again-btn:hover{background:rgba(233,220,187,.12);color:#fff}
+
+/* game intro overlay */
+#gintro{position:absolute;inset:0;z-index:5;background:linear-gradient(160deg,#1a3623,#0f2417);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;color:#f3efe4;transition:opacity .8s;cursor:pointer}
+#gintro.hide{opacity:0;pointer-events:none}
+#gintro .it{font-family:'Cormorant Garamond',serif;font-size:2.2rem;opacity:0;transform:translateY(14px);animation:rise .9s forwards}
+#gintro .is{color:#cdbf9e;font-style:italic;margin-top:8px;opacity:0;animation:rise .9s .5s forwards}
+#gintro .go{margin-top:22px;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:#e9dcbb;opacity:0;animation:rise .9s 1.1s forwards}
+#gintro .rowtiles{display:flex;gap:10px;margin-bottom:26px}
+#gintro .rowtiles i{width:40px;height:56px;border-radius:6px;background:linear-gradient(#fbf8f0,#efe7d4);box-shadow:0 4px 0 #cbbfa4;
+  display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--red);
+  opacity:0;transform:translateY(-30px) rotate(-8deg);animation:drop .6s forwards}
+@keyframes drop{to{opacity:1;transform:none}}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* BOOK */
+.book-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:center}
+.book-grid img{width:100%;max-width:320px;box-shadow:0 26px 50px -20px rgba(28,42,58,.5);border-radius:3px;justify-self:center}
+@media(max-width:820px){.book-grid{grid-template-columns:1fr}}
+.framework-img{width:100%;max-width:900px;margin:36px auto 0;display:block;border-radius:10px;box-shadow:0 20px 40px -22px rgba(0,0,0,.4)}
+
+/* WORK cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:820px){.cards{grid-template-columns:1fr}}
+.card{background:var(--ivory);border:1px solid var(--line);border-radius:10px;padding:32px 26px;transition:.25s}
+.band.alt .card{background:#fff}
+.card:hover{transform:translateY(-5px);box-shadow:0 20px 40px -24px rgba(28,42,58,.4);border-color:var(--gold)}
+.card .ic{font-size:1.6rem;margin-bottom:12px}
+.card h3{font-size:1.5rem;color:var(--navy);margin-bottom:10px}
+.card ul{list-style:none;margin-top:14px}
+.card li{font-size:.9rem;color:var(--muted);padding:4px 0 4px 18px;position:relative}
+.card li::before{content:"◆";position:absolute;left:0;color:var(--gold);font-size:.6rem;top:8px}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:46px;align-items:center}
+@media(max-width:820px){.about-grid{grid-template-columns:1fr}}
+.photo-ph{aspect-ratio:4/5;background:linear-gradient(150deg,var(--ivory-2),#e2d9c4);border:1px solid var(--line);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;color:var(--gold);text-align:center;font-size:.8rem;letter-spacing:.1em}
+.creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.creds span{font-size:.75rem;background:var(--ivory-2);border:1px solid var(--line);padding:6px 12px;border-radius:20px;color:var(--muted)}
+.band.alt .creds span{background:#fff}
+
+/* CONTACT */
+.ways{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:26px 0 34px}
+.ways span{font-size:.85rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);padding:8px 16px;border-radius:22px}
+
+footer{background:#12293f;color:#a9b6c4;padding:36px 0;text-align:center;font-size:.85rem}
+footer .brand{color:#fff;display:block;margin-bottom:6px}
+.pitch-flag{position:fixed;bottom:14px;left:14px;z-index:99;background:var(--red);color:#fff;font-size:.68rem;letter-spacing:.1em;
+  padding:6px 12px;border-radius:20px;opacity:.85}
+</style>
+</head>
+<body>
+
+<div class="pitch-flag">✦ Concept preview — built for Maureen by MixedMakerShop</div>
+
+<nav><div class="wrap">
+  <div class="brand">Maureen A. <span>Cahill</span></div>
+  <div class="navlinks">
+    <a href="#game">The Game</a>
+    <a href="#book">The Book</a>
+    <a href="#about">About</a>
+    <a href="#work">Work With Me</a>
+    <a href="#contact">Contact</a>
+    <a href="#launch" class="btn btn-red">Join the Launch List</a>
+  </div>
+</div></nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="enso"></div>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Leadership. Simplified.</p>
+      <h1><span class="navy">Ancient Game.</span><br><span class="green">Modern Leadership.</span></h1>
+      <p class="sub">Timeless lessons from the Mahjong table</p>
+      <p class="lead">Leaders don't need more theories to memorize. They need practical ways to think, decide, and lead — drawn from a game as old as leadership itself.</p>
+      <div class="cta">
+        <a href="#game" class="btn btn-primary" onclick="startGame()">Play a Hand →</a>
+        <a href="#book" class="btn btn-ghost">Discover the Book</a>
+      </div>
+    </div>
+    <div class="cover-wrap"><span class="soon-badge">Coming Soon</span><img src="assets/book-cover.png" alt="Ancient Game. Modern Leadership. by Maureen A. Cahill"></div>
+  </div>
+</header>
+
+<!-- TEASER GAME -->
+<section class="band alt" id="game">
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="eyebrow">The Teaser · Play a Hand</p>
+      <h2>You're dealt three tiles. Choose wisely.</h2>
+      <p>Every tile holds a leadership lesson from the Mahjong table. Turn over any <strong>three</strong> — then discover why great leaders come back for all ten.</p>
+    </div>
+
+    <div class="game-stage">
+      <!-- animated intro -->
+      <div id="gintro">
+        <div class="rowtiles">
+          <i style="animation-delay:.05s">發</i><i style="animation-delay:.2s">JOKER</i>
+          <i style="animation-delay:.35s">🀄</i><i style="animation-delay:.5s">中</i><i style="animation-delay:.65s">二</i>
+        </div>
+        <div class="it">Ancient Game. Modern Leadership.</div>
+        <div class="is">Timeless lessons from the Mahjong table</div>
+        <button class="start-btn" onclick="startGame()">▶ Deal My 3 Tiles</button>
+      </div>
+
+      <div class="game-head">
+        <h3>Your Hand of Three</h3>
+        <p class="tap-cue" id="tapCue">👆 Tap any tile below to turn it over</p>
+        <div class="hand-counter" id="counter">Tiles remaining in your hand: 3</div>
+      </div>
+
+      <div class="phases" id="phases"></div>
+
+      <div class="game-cta">
+        <div class="msg" id="gmsg"></div>
+        <div class="end-actions">
+          <button class="btn again-btn" id="againBtn" style="display:none" onclick="resetHand()">↺ Deal a New Hand</button>
+          <a href="#launch" class="btn btn-red" id="unlockBtn" style="display:none">Want all 10? Join the launch list →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class="band" id="book">
+  <div class="wrap">
+    <div class="book-grid">
+      <img src="assets/book-cover.png" alt="Book cover">
+      <div>
+        <p class="eyebrow">The Book</p>
+        <h2 style="font-size:2.4rem;margin:8px 0 16px;color:var(--navy)">Ancient Game. Modern Leadership.</h2>
+        <p style="color:var(--muted);margin-bottom:16px">Great leaders don't simply play the hand they're dealt. They read the room. They adapt. They balance risk with opportunity. They build trust and create environments where others succeed.</p>
+        <p style="color:var(--muted);margin-bottom:22px">Using the timeless game of Mahjong as a metaphor, this book turns ten leadership parallels into practical actions you can apply immediately — whether you lead a team of five or an organization of five thousand.</p>
+        <p style="color:var(--gold);font-weight:600;margin-bottom:18px">📖 Launching soon — be the first to read it.</p>
+        <a href="#launch" class="btn btn-primary">Join the Launch List →</a>
+      </div>
+    </div>
+    <img class="framework-img" src="assets/framework-infographic.png" alt="Ten lessons across four phases">
+  </div>
+</section>
+
+<!-- LAUNCH LIST -->
+<section class="band launch-band" id="launch">
+  <div class="wrap center">
+    <p class="eyebrow" style="color:var(--gold)">Be First</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin:10px 0 8px;color:#fff">Join the Launch List</h2>
+    <p style="color:#d8cfb8;max-width:52ch;margin:0 auto 8px">Get the full set of ten leadership lessons, early access when <em>Ancient Game. Modern Leadership.</em> launches, and a free practical framework you can use at your next meeting.</p>
+    <form class="signup" id="signup" onsubmit="return joinList(event)">
+      <input type="email" id="email" placeholder="your@email.com" required aria-label="Email">
+      <button type="submit" class="btn btn-red">Notify Me →</button>
+    </form>
+    <div id="signup-ok" class="signup-ok">✓ You're on the list — you'll be first to know. (Demo — wires to Maureen's email tool on launch.)</div>
+    <p style="color:#9a927f;font-size:.75rem;margin-top:14px">No spam. Just the lessons and the launch. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="band alt" id="about">
+  <div class="wrap about-grid">
+    <div class="photo-ph" data-photo>MAUREEN'S<br>PHOTO HERE</div>
+    <div>
+      <p class="eyebrow">About the Author</p>
+      <h2 style="font-size:2.4rem;margin:8px 0 16px;color:var(--navy)">Meet Maureen</h2>
+      <p style="color:var(--muted);margin-bottom:14px">Leadership has been the common thread throughout my career — as a Chief Human Resources Officer, Chief People Officer, executive advisor, coach, facilitator, author, and adjunct professor. I've partnered with leaders shaping organizations through growth, transformation, mergers, culture change, and uncertainty.</p>
+      <p style="color:var(--muted);margin-bottom:14px">Most recently I served as Senior Managing Partner with McLean &amp; Company, advising Chief Human Resource Officers around the world. Teaching graduate students at Carnegie Mellon University showed me just how powerful practical learning can be.</p>
+      <p style="color:var(--muted)">One question stayed with me: how do we make leadership easier to remember — and easier to practice? That question led me to Mahjong, and to this book.</p>
+      <div class="creds">
+        <span>25+ yrs executive leadership</span><span>Former CHRO &amp; CPO</span>
+        <span>Sr. Managing Partner, McLean &amp; Co.</span><span>Advisor to CEOs &amp; CHROs</span>
+        <span>Adjunct Professor, Carnegie Mellon</span><span>Executive Coach</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="band" id="work">
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="eyebrow">Work With Me</p>
+      <h2>Three ways to lead differently</h2>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="ic">🎯</div><h3>Executive Coaching</h3>
+        <p style="color:var(--muted);font-size:.92rem">A thinking partner for leaders who want to lead with greater confidence and clarity.</p>
+        <ul><li>Navigate complex decisions</li><li>Build stronger teams</li><li>Increase executive presence</li><li>Prepare for larger roles</li></ul></div>
+      <div class="card"><div class="ic">🎤</div><h3>Speaking</h3>
+        <p style="color:var(--muted);font-size:.92rem">Practical, memorable keynotes audiences are still using six months later.</p>
+        <ul><li>Ancient Game. Modern Leadership.</li><li>Leadership in Times of Change</li><li>Building High-Performing Teams</li><li>The Human Advantage in an AI World</li></ul></div>
+      <div class="card"><div class="ic">🧭</div><h3>Facilitation</h3>
+        <p style="color:var(--muted);font-size:.92rem">Structure that helps leadership teams do their best thinking.</p>
+        <ul><li>Strategic Planning</li><li>Executive Team Alignment</li><li>Leadership Retreats</li><li>Culture Workshops</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="band dark" id="contact">
+  <div class="wrap center">
+    <p class="eyebrow">Contact</p>
+    <h2 style="font-size:2.6rem;margin:10px 0 14px">Let's start a conversation</h2>
+    <p style="color:#c9d3dd;max-width:52ch;margin:0 auto">Keynote speaking, executive coaching, facilitation, workshops — or simply a question about the book. I'd love to hear from you.</p>
+    <div class="ways">
+      <span>✓ Keynote Speaking</span><span>✓ Executive Coaching</span><span>✓ Team Facilitation</span>
+      <span>✓ Workshops</span><span>✓ Book Clubs</span><span>✓ Corporate Orders</span><span>✓ Media</span>
+    </div>
+    <a href="#" class="btn btn-red" data-contact>Get in Touch →</a>
+  </div>
+</section>
+
+<footer>
+  <span class="brand serif" style="font-size:1.3rem">Maureen A. Cahill</span>
+  Leadership. Simplified. &nbsp;·&nbsp; Executive Coaching | Speaking | Facilitation | Author
+  <div style="margin-top:10px;opacity:.6;font-size:.75rem">Concept site by MixedMakerShop · placeholders swap for real photo &amp; links on approval</div>
+</footer>
+
+<script>
+const LESSONS = [
+  {p:0,n:1,t:"Curate the Environment",tip:"Before the first tile is drawn, the table is already set. Great leaders shape the conditions — clarity, safety, focus — so the right moves become possible."},
+  {p:0,n:2,t:"Learn the Rules of the Game",tip:"You can't win a game you don't understand. Master the real rules — written and unwritten — before you try to change them."},
+  {p:0,n:3,t:"Ground Your Team in Ritual",tip:"Rituals turn a group into a team. Small, repeated practices build the trust and rhythm that carry people through pressure."},
+  {p:1,n:4,t:"Harness the Power of Observation",tip:"The best players watch more than they move. Read the table — what's discarded, what's held — before you act."},
+  {p:1,n:5,t:"Regulate Emotions",tip:"Your face is part of your hand. Composure under pressure keeps your options open and your team steady."},
+  {p:2,n:6,t:"Master the Art of the Pivot",tip:"The hand you planned rarely survives the first draw. Great leaders change direction without losing their center."},
+  {p:2,n:7,t:"Balance Offense and Defense",tip:"Chasing the win while ignoring the risk loses games. Know when to press and when to protect."},
+  {p:3,n:8,t:"Celebrate Every Win",tip:"Mahjong marks every completed hand. Naming small wins builds the momentum that reaches the big ones."},
+  {p:3,n:9,t:"Learn from Better Players",tip:"Sit with people who beat you. Every stronger player at the table is a lesson you couldn't teach yourself."},
+  {p:3,n:10,t:"Foster Connection",tip:"The game outlasts any single hand because of the people around the table. Connection is the real long game of leadership."}
+];
+const PHASES=[{h:"Set the Table",s:"Create the conditions"},{h:"Read the Room",s:"Awareness before action"},{h:"Play Your Hand",s:"Respond intentionally"},{h:"Elevate the Game",s:"Multiply your impact"}];
+const TILEGLYPH=["發","中","🀄","二","JOKER","八","东","南","西","北"];
+
+let picks=3, revealed=0;
+const phasesEl=document.getElementById('phases');
+PHASES.forEach((ph,pi)=>{
+  const col=document.createElement('div');col.className='phase';
+  col.innerHTML=`<h4><span class="ph-sub">${ph.s}</span>${ph.h}</h4><div class="tiles" data-p="${pi}"></div>`;
+  phasesEl.appendChild(col);
+});
+LESSONS.forEach((L,i)=>{
+  const holder=phasesEl.querySelector(`.tiles[data-p="${L.p}"]`);
+  const tile=document.createElement('div');tile.className='tile';tile.dataset.i=i;
+  tile.innerHTML=`
+    <div class="tile-inner">
+      <div class="tile-face">
+        <span class="lock">🔒</span>
+        <div class="num">${TILEGLYPH[i]}</div>
+        <div class="t-title">${L.t}</div>
+        <div class="hint">👆 Tap</div>
+      </div>
+      <div class="tile-back">
+        <div class="t-title">${L.n}. ${L.t}</div>
+        <div class="tip">${L.tip}</div>
+      </div>
+    </div>`;
+  tile.addEventListener('click',()=>flip(tile,L));
+  holder.appendChild(tile);
+});
+function flip(tile,L){
+  if(tile.classList.contains('flipped')) return;
+  if(picks<=0){ lockRest(); return; }
+  tile.classList.add('flipped'); picks--; revealed++;
+  document.getElementById('counter').textContent = picks>0
+    ? `Tiles remaining in your hand: ${picks}` : `Your hand is played.`;
+  const msg=document.getElementById('gmsg');
+  if(picks===0){
+    setTimeout(lockRest,650);
+    document.getElementById('tapCue').style.display='none';
+    msg.textContent=`Three revealed — but a full hand holds all ten.`;
+    document.getElementById('unlockBtn').style.display='inline-block';
+    document.getElementById('againBtn').style.display='inline-block';
+  }else{
+    msg.textContent=`Lesson ${L.n} revealed — ${picks} more to turn.`;
+  }
+}
+function lockRest(){
+  document.querySelectorAll('.tile:not(.flipped)').forEach(t=>{t.classList.add('locked','disabled');});
+}
+function resetHand(){
+  picks=3; revealed=0;
+  document.querySelectorAll('.tile').forEach(t=>t.classList.remove('flipped','locked','disabled'));
+  document.getElementById('counter').textContent='Tiles remaining in your hand: 3';
+  document.getElementById('gmsg').textContent='';
+  document.getElementById('unlockBtn').style.display='none';
+  document.getElementById('againBtn').style.display='none';
+  const cue=document.getElementById('tapCue'); cue.style.display='';
+  phasesEl.classList.add('active');
+  document.getElementById('game').scrollIntoView({behavior:'smooth'});
+}
+// launch list signup (demo — client-side confirm; wires to Maureen's email tool on launch)
+function joinList(e){
+  e.preventDefault();
+  const ok=document.getElementById('signup-ok');
+  document.getElementById('signup').style.display='none';
+  ok.classList.add('show');
+  return false;
+}
+// start the game: scroll to it, dismiss the intro, light up the tiles
+const intro=document.getElementById('gintro');
+function startGame(){
+  document.getElementById('game').scrollIntoView({behavior:'smooth'});
+  intro.classList.add('hide');
+  phasesEl.classList.add('active');           // triggers the tile pulse
+  return true;
+}
+</script>
+</body>
+</html>
