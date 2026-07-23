@@ -158,6 +158,8 @@ section.band{padding:84px 0}
 @media(max-width:820px){.about-grid{grid-template-columns:1fr}}
 .photo-ph{aspect-ratio:4/5;background:linear-gradient(150deg,var(--ivory-2),#e2d9c4);border:1px solid var(--line);border-radius:10px;
   display:flex;align-items:center;justify-content:center;color:var(--gold);text-align:center;font-size:.8rem;letter-spacing:.1em}
+.photo-real{border-radius:12px;overflow:hidden;box-shadow:0 22px 44px -20px rgba(28,42,58,.5);border:5px solid #fff}
+.photo-real img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 30%}
 .creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .creds span{font-size:.75rem;background:var(--ivory-2);border:1px solid var(--line);padding:6px 12px;border-radius:20px;color:var(--muted)}
 .band.alt .creds span{background:#fff}
@@ -282,7 +284,7 @@ footer .brand{color:#fff;display:block;margin-bottom:6px}
 <!-- ABOUT -->
 <section class="band alt" id="about">
   <div class="wrap about-grid">
-    <div class="photo-ph" data-photo>MAUREEN'S<br>PHOTO HERE</div>
+    <div class="photo-real"><img src="assets/maureen.jpg" alt="Maureen A. Cahill"></div>
     <div>
       <p class="eyebrow">About the Author</p>
       <h2 style="font-size:2.4rem;margin:8px 0 16px;color:var(--navy)">Meet Maureen</h2>
