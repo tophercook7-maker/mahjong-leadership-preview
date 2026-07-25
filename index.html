@@ -267,10 +267,10 @@ footer .brand{display:block;margin-bottom:6px;font-size:1.3rem}
   <h2 class="reveal d1" style="font-size:clamp(2rem,5vw,3rem);color:var(--ivory)">Join the Launch List</h2>
   <p class="lead reveal d2" style="margin-top:12px">Get the full set of ten leadership lessons, early access when the book launches, and a free practical framework for your next meeting.</p>
   <form class="signup reveal d2" id="signup" onsubmit="return joinList(event)">
-    <input type="email" id="email" placeholder="your@email.com" required aria-label="Email">
+    <input type="email" id="email" name="email" placeholder="your@email.com" required aria-label="Email">
     <button type="submit" class="btn btn-red">Notify Me →</button>
   </form>
-  <div id="signup-ok" class="signup-ok reveal">✓ You're on the list — you'll be first to know. (Demo — wires to a real email tool on launch.)</div>
+  <div id="signup-ok" class="signup-ok reveal">✓ You're on the list — you'll be first to know when the book launches.</div>
 </section>
 
 <!-- CONTACT -->
@@ -380,7 +380,8 @@ function resetHand(){picks=3;document.querySelectorAll('.tile').forEach(t=>t.cla
   document.getElementById('tapCue').style.display='';document.getElementById('phases').classList.add('active');}
 function startGame(){document.getElementById('gintro').classList.add('hide');document.getElementById('phases').classList.add('active');
   document.getElementById('play').scrollIntoView({behavior:'smooth'});return true;}
-function joinList(e){e.preventDefault();document.getElementById('signup').style.display='none';document.getElementById('signup-ok').classList.add('show','in');return false;}
+function joinList(e){e.preventDefault();var em=document.getElementById('email').value;var b=e.target.querySelector('button');if(b){b.disabled=true;b.textContent='Sending…';}var done=function(){document.getElementById('signup').style.display='none';document.getElementById('signup-ok').classList.add('show','in');};fetch('https://formsubmit.co/ajax/mkennedycahill@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:em,_subject:'New mailing-list signup - maureenacahill.com',_template:'table',_captcha:'false'})}).then(function(r){return r.json();}).then(done).catch(done);return false;}
 </script>
 </body>
 </html>
+
