@@ -67,8 +67,8 @@ nav.solid{background:rgba(10,26,17,.72);backdrop-filter:blur(12px);padding-top:1
 @media(max-width:820px){.navlinks a:not(.nav-cta){display:none}}
 
 /* ---------- acts (full-height scroll chapters) ---------- */
-.act{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;padding:12vh clamp(22px,6vw,80px);z-index:1}
+.act{position:relative;min-height:auto;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:clamp(46px,6.5vh,92px) clamp(22px,6vw,80px);z-index:1}
 .eyebrow{font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:600}
 .reveal{opacity:0;transform:translateY(38px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
 .reveal.in{opacity:1;transform:none}
@@ -79,7 +79,7 @@ nav.solid{background:rgba(10,26,17,.72);backdrop-filter:blur(12px);padding-top:1
 #hero h1 .g{color:var(--gold)}
 #hero .sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.3rem,3vw,2rem);color:var(--gold);margin-top:6px}
 #hero .who{margin-top:18px;letter-spacing:.2em;text-transform:uppercase;font-size:.74rem;color:#b9b1a0}
-.hero-tiles{display:flex;gap:14px;margin-bottom:40px}
+.hero-tiles{display:flex;gap:14px;margin-bottom:26px}
 .hero-tiles .t{width:clamp(54px,9vw,84px);aspect-ratio:5/7;border-radius:10px;background:linear-gradient(#f8f3e8,#e7ddc7);
   box-shadow:0 16px 34px rgba(0,0,0,.55), inset 0 -8px 0 #ccbe9f;display:flex;align-items:center;justify-content:center;
   font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:700}
@@ -168,10 +168,11 @@ footer .brand{display:block;margin-bottom:6px;font-size:1.3rem}
 .lead{max-width:52ch;margin:0 auto;color:#c9c1b0}
 
 /* --- seamless hero -> book blend --- */
-#hero{min-height:86vh;padding-bottom:0}
-#hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:26vh;background:linear-gradient(to bottom,transparent,var(--felt0));pointer-events:none;z-index:-1}
-#book{min-height:auto;padding:2vh 24px 13vh}
+#hero{min-height:auto;padding:13vh 24px 11vh}
+#hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:15vh;background:linear-gradient(to bottom,transparent,var(--felt0));pointer-events:none;z-index:-1}
+#book{min-height:auto;padding:clamp(40px,5vh,72px) 24px}
 #book .eyebrow{margin-top:0}
+#play{min-height:64vh}
 </style>
 </head>
 <body>
