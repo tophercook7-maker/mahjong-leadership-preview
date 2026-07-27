@@ -138,9 +138,9 @@ nav.solid{background:rgba(10,26,17,.72);backdrop-filter:blur(12px);padding-top:1
 #gintro .it{font-family:'Cormorant Garamond',serif;font-size:2rem}#gintro .is{color:#cdbf9e;font-style:italic;margin-top:8px}
 
 /* meet maureen */
-.meet{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,6vw,70px);align-items:center;max-width:1080px;width:100%;text-align:left}
-@media(max-width:820px){.meet{grid-template-columns:1fr;text-align:center}}
-.meet .pf{border-radius:14px;overflow:hidden;box-shadow:0 40px 80px -40px #000;border:1px solid rgba(255,255,255,.12)}
+.meet{display:grid;grid-template-columns:.62fr 1.38fr;gap:clamp(30px,6vw,70px);align-items:center;max-width:1080px;width:100%;text-align:left}
+@media(max-width:820px){.meet{grid-template-columns:1fr;text-align:center}.meet .pf{max-width:220px;margin:0 auto}}
+.meet .pf{max-width:300px;border-radius:14px;overflow:hidden;box-shadow:0 40px 80px -40px #000;border:1px solid rgba(255,255,255,.12)}
 .meet .pf img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 26%}
 .meet h2{font-size:clamp(2.2rem,5vw,3.4rem);color:var(--ivory);margin:10px 0 16px}
 .meet p{color:#c9c1b0;margin-bottom:12px}
@@ -185,6 +185,7 @@ footer .brand{display:block;margin-bottom:6px;font-size:1.3rem}
 </nav>
 
 <!-- HERO -->
+<!-- HERO -->
 <section class="act" id="hero">
   <div class="hero-tiles reveal">
     <div class="t" style="color:#3a6b4a">發</div>
@@ -198,17 +199,29 @@ footer .brand{display:block;margin-bottom:6px;font-size:1.3rem}
   <div class="scrollcue">Take your seat</div>
 </section>
 
-<!-- INTRO LINE -->
+<!-- LESSONS -->
 <section class="act" id="intro">
   <p class="eyebrow reveal">The Idea</p>
   <h2 class="reveal d1" style="font-size:clamp(2rem,5.4vw,3.6rem);color:var(--ivory);max-width:16ch">Ten lessons, dealt one tile at a time.</h2>
   <p class="lead reveal d2" style="margin-top:22px">Great leaders don't simply play the hand they're dealt. They read the room. They adapt. They build trust. Scroll on — and watch the table teach you how.</p>
 </section>
 
-<!-- PHASE ACTS (built by JS) -->
-<div id="phases-acts"></div>
+<!-- BOOK -->
+<section class="act" id="book">
+  <div class="book">
+    <div class="cov reveal"><span class="soon">Coming Soon</span><img src="assets/book-cover.png" alt="Book cover"></div>
+    <div>
+      <p class="eyebrow reveal">The Book</p>
+      <h2 class="reveal d1">Ancient Game. Modern Leadership.</h2>
+      <p class="reveal d1">Using the timeless game of Mahjong as a metaphor, ten leadership parallels become practical actions you can apply immediately — whether you lead a team of five or an organization of five thousand.</p>
+      <p class="reveal d2" style="color:var(--gold)">📖 Launching soon — be the first to read it.</p>
+      <a href="#launch" class="btn btn-gold reveal d2">Join the Launch List →</a>
+    </div>
+  </div>
+  <img class="framework reveal d2" src="assets/framework-infographic.png" alt="Ten lessons across four phases">
+</section>
 
-<!-- PLAY A HAND -->
+<!-- GAME -->
 <section class="act" id="play">
   <p class="eyebrow reveal">Now You · Play a Hand</p>
   <h2 class="reveal d1" style="font-size:clamp(1.8rem,4.4vw,2.8rem);color:var(--ivory);margin-bottom:8px">You're dealt three tiles.</h2>
@@ -229,38 +242,6 @@ footer .brand{display:block;margin-bottom:6px;font-size:1.3rem}
       <a href="#launch" class="btn btn-red" id="unlockBtn" style="display:none">Want all 10? Join the launch list →</a>
     </div>
   </div>
-</section>
-
-<!-- MEET MAUREEN -->
-<section class="act" id="about">
-  <div class="meet">
-    <div class="pf reveal"><img src="assets/maureen.jpg" alt="Maureen A. Cahill"></div>
-    <div>
-      <p class="eyebrow reveal">The Leader Behind the Lessons</p>
-      <h2 class="reveal d1">Meet Maureen</h2>
-      <p class="reveal d1">Leadership has been the common thread of my career — Chief Human Resources Officer, Chief People Officer, executive advisor, coach, facilitator, author, and adjunct professor. I've partnered with leaders through growth, transformation, mergers, and culture change.</p>
-      <p class="reveal d2">Most recently Senior Managing Partner with McLean &amp; Company, advising CHROs around the world. Teaching at Carnegie Mellon showed me how powerful practical learning can be — and that question led me to Mahjong, and to this book.</p>
-      <div class="creds reveal d3">
-        <span>25+ yrs executive leadership</span><span>Former CHRO &amp; CPO</span>
-        <span>Sr. Managing Partner, McLean &amp; Co.</span><span>Adjunct Professor, Carnegie Mellon</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BOOK -->
-<section class="act" id="book">
-  <div class="book">
-    <div class="cov reveal"><span class="soon">Coming Soon</span><img src="assets/book-cover.png" alt="Book cover"></div>
-    <div>
-      <p class="eyebrow reveal">The Book</p>
-      <h2 class="reveal d1">Ancient Game. Modern Leadership.</h2>
-      <p class="reveal d1">Using the timeless game of Mahjong as a metaphor, ten leadership parallels become practical actions you can apply immediately — whether you lead a team of five or an organization of five thousand.</p>
-      <p class="reveal d2" style="color:var(--gold)">📖 Launching soon — be the first to read it.</p>
-      <a href="#launch" class="btn btn-gold reveal d2">Join the Launch List →</a>
-    </div>
-  </div>
-  <img class="framework reveal d2" src="assets/framework-infographic.png" alt="Ten lessons across four phases">
 </section>
 
 <!-- WORK -->
@@ -296,6 +277,23 @@ footer .brand{display:block;margin-bottom:6px;font-size:1.3rem}
     <span>✓ Workshops</span><span>✓ Book Clubs</span><span>✓ Media</span>
   </div>
   <a href="#launch" class="btn btn-red reveal d2">Get in Touch →</a>
+</section>
+
+<!-- ABOUT -->
+<section class="act" id="about">
+  <div class="meet">
+    <div class="pf reveal"><img src="assets/maureen.jpg" alt="Maureen A. Cahill"></div>
+    <div>
+      <p class="eyebrow reveal">The Leader Behind the Lessons</p>
+      <h2 class="reveal d1">Meet Maureen</h2>
+      <p class="reveal d1">Leadership has been the common thread of my career — Chief Human Resources Officer, Chief People Officer, executive advisor, coach, facilitator, author, and adjunct professor. I've partnered with leaders through growth, transformation, mergers, and culture change.</p>
+      <p class="reveal d2">Most recently Senior Managing Partner with McLean &amp; Company, advising CHROs around the world. Teaching at Carnegie Mellon showed me how powerful practical learning can be — and that question led me to Mahjong, and to this book.</p>
+      <div class="creds reveal d3">
+        <span>25+ yrs executive leadership</span><span>Former CHRO &amp; CPO</span>
+        <span>Sr. Managing Partner, McLean &amp; Co.</span><span>Adjunct Professor, Carnegie Mellon</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
@@ -397,5 +395,6 @@ function joinList(e){e.preventDefault();var em=document.getElementById('email').
 </script>
 </body>
 </html>
+
 
 
