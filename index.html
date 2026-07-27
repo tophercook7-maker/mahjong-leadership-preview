@@ -166,6 +166,12 @@ footer{text-align:center;padding:44px 20px;color:#8f887a;font-size:.82rem;border
 footer .brand{display:block;margin-bottom:6px;font-size:1.3rem}
 .flag{position:fixed;bottom:12px;left:12px;z-index:80;background:var(--red);color:#fff;font-size:.64rem;letter-spacing:.08em;padding:6px 12px;border-radius:20px;opacity:.82}
 .lead{max-width:52ch;margin:0 auto;color:#c9c1b0}
+
+/* --- seamless hero -> book blend --- */
+#hero{min-height:86vh;padding-bottom:0}
+#hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:26vh;background:linear-gradient(to bottom,transparent,var(--felt0));pointer-events:none;z-index:-1}
+#book{min-height:auto;padding:2vh 24px 13vh}
+#book .eyebrow{margin-top:0}
 </style>
 </head>
 <body>
@@ -398,6 +404,7 @@ function joinList(e){e.preventDefault();var em=document.getElementById('email').
 </script>
 </body>
 </html>
+
 
 
 
