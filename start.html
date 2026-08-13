@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Let's Get Started — Maureen A. Cahill</title>
+<meta name="description" content="Explore the ten leadership parallels, work with Maureen through coaching, facilitation and speaking, or learn the game that inspired the book.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Maureen A. Cahill">
+<link rel="canonical" href="https://maureenacahill.com/start.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Maureen A. Cahill">
+<meta property="og:title" content="Let's Get Started — Maureen A. Cahill">
+<meta property="og:description" content="Pull up a chair. The table is set.">
+<meta property="og:url" content="https://maureenacahill.com/start.html">
+<meta property="og:image" content="https://maureenacahill.com/assets/book-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<div class="table-env"></div>
+<div class="light-pool"></div>
+<div class="enso-bg" data-par="0.18"></div>
+<div class="floaters" id="floaters"></div>
+
+<nav id="nav">
+  <a class="brand" href="index.html">Maureen A. <span>Cahill</span></a>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navlinks" onclick="toggleMenu()">☰</button>
+  <div class="navlinks" id="navlinks">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Maureen</a>
+    <a href="book.html">The Book</a>
+    <a href="start.html" class="current">Let's Get Started</a>
+    <a href="launch.html" class="nav-cta">Join the Launch List</a>
+  </div>
+</nav>
+
+<!-- ============ HEADER ============ -->
+<header class="act page-top">
+  <p class="eyebrow reveal">Let's Get Started</p>
+  <h1 class="reveal d1" style="font-size:clamp(2.2rem,6.2vw,4.4rem);color:var(--ivory);max-width:17ch;margin-top:10px">
+    Pull Up a Chair.<br><span style="color:var(--gold)">The Table Is Set.</span>
+  </h1>
+  <p class="lead reveal d2" style="margin-top:24px">
+    Whether you're looking for fresh leadership ideas, preparing your team for what's next, learning Mahjong,
+    or following the journey of <em>Ancient Game. Modern Leadership</em>, I'd love to have you join the conversation.
+    Here's where to begin.
+  </p>
+  <div class="paths reveal d3" style="margin-top:46px">
+    <a class="path link" href="#explore"><div class="mark">一</div><h3>Explore the Book</h3>
+      <p>Discover the ten leadership parallels inspired by one of the world's oldest games.</p>
+      <div class="go">Turn over a tile →</div></a>
+    <a class="path link" href="#work"><div class="mark">二</div><h3>Work With Me</h3>
+      <p>Executive coaching, leadership team facilitation, and speaking engagements designed to create lasting impact.</p>
+      <div class="go">Start a conversation →</div></a>
+    <a class="path link" href="#mahjong"><div class="mark">三</div><h3>Learn Mahjong</h3>
+      <p>Resources, workshops, and recommendations for players who are curious about the game that inspired the book.</p>
+      <div class="go">Learn the game →</div></a>
+  </div>
+</header>
+
+<!-- ============ 1 · EXPLORE THE BOOK ============ -->
+<section class="act" id="explore">
+  <p class="eyebrow reveal">One · Explore the Book</p>
+  <h2 class="reveal d1" style="font-size:clamp(1.9rem,4.8vw,2.9rem);color:var(--ivory);margin:10px 0 12px">
+    Ten parallels, one tile at a time.
+  </h2>
+  <p class="lead reveal d2" style="margin-bottom:34px">
+    Discover the ten leadership parallels inspired by one of the world's oldest games.
+    Turn over any tile — tiles marked <span style="color:var(--gold)">✦</span> open the full leadership model behind that parallel.
+  </p>
+
+  <div class="stage reveal d2">
+    <div id="gintro">
+      <div class="it">Ancient Game. Modern Leadership.</div>
+      <div class="is">Timeless lessons from the Mahjong table</div>
+      <button class="start-btn" onclick="startBoard()">▶ Set the Table</button>
+    </div>
+    <div class="game-head">
+      <h3>The Ten Parallels</h3>
+      <p class="tap-cue" id="tapCue">👆 Tap any tile to turn it over</p>
+      <div class="hand-counter" id="counter">Ten parallels — turn over any tile</div>
+    </div>
+    <div class="pgrid" id="phases"></div>
+    <div class="gmsg" id="gmsg"></div>
+    <div class="end-actions">
+      <button class="btn btn-ghost" onclick="revealAll()">Turn Over All Ten</button>
+      <button class="btn btn-gold" id="resetBtn" style="display:none" onclick="resetBoard()">↺ Reset the Table</button>
+      <a href="book.html" class="btn btn-red">Read More About the Book →</a>
+    </div>
+  </div>
+
+  <div class="capture reveal" style="margin-top:40px">
+    <p class="lead" style="margin-bottom:16px">Want the full ten — with the stories, case studies, and practical actions behind them?</p>
+    <form data-capture data-source="Explore the Book">
+      <div class="fields">
+        <input type="text" name="Name" placeholder="Your name" aria-label="Your name">
+        <input type="email" name="Email" placeholder="your@email.com" required aria-label="Your email">
+      </div>
+      <div class="fields" style="margin-top:10px">
+        <button type="submit" class="btn btn-red" style="flex:1">Send Me the Ten Parallels →</button>
+      </div>
+      <p class="note">You'll also get book updates as we approach launch.</p>
+    </form>
+    <div class="form-ok">✓ Thank you — it's on its way, and you're on the list.</div>
+  </div>
+</section>
+
+<!-- ============ 2 · WORK WITH ME ============ -->
+<section class="act" id="work">
+  <p class="eyebrow reveal">Two · Work With Me</p>
+  <h2 class="reveal d1" style="font-size:clamp(1.9rem,4.8vw,2.9rem);color:var(--ivory);margin:10px 0 12px">
+    Designed to create lasting impact.
+  </h2>
+  <p class="lead reveal d2" style="margin-bottom:36px">
+    Executive coaching, leadership team facilitation, and speaking engagements designed to create lasting impact.
+  </p>
+  <div class="paths">
+    <div class="path reveal d1"><div class="mark">✦</div><h3>Executive Coaching</h3>
+      <p>A thinking partner for leaders navigating growth, transformation, succession, and the everyday realities of leading people.</p></div>
+    <div class="path reveal d2"><div class="mark">✦</div><h3>Leadership Team Facilitation</h3>
+      <p>Structure that helps teams do their best thinking together — and leave with decisions, not just discussion.</p></div>
+    <div class="path reveal d3"><div class="mark">✦</div><h3>Speaking</h3>
+      <p>Keynotes and workshops that give audiences practical leadership principles they still use six months later.</p></div>
+  </div>
+
+  <div class="capture reveal" style="margin-top:40px;max-width:620px">
+    <p class="lead" style="margin-bottom:16px">Tell me what you're working on and I'll be in touch.</p>
+    <form data-capture data-source="Work With Me — inquiry">
+      <div class="fields">
+        <input type="text" name="Name" placeholder="Your name" required aria-label="Your name">
+        <input type="email" name="Email" placeholder="your@email.com" required aria-label="Your email">
+      </div>
+      <div class="fields" style="margin-top:10px">
+        <input type="text" name="Organization" placeholder="Organization (optional)" aria-label="Organization">
+      </div>
+      <div class="fields" style="margin-top:10px">
+        <input type="text" name="Interested in" placeholder="Coaching, facilitation, or speaking?" aria-label="What are you interested in">
+      </div>
+      <div class="fields" style="margin-top:10px">
+        <button type="submit" class="btn btn-red" style="flex:1">Start a Conversation →</button>
+      </div>
+    </form>
+    <div class="form-ok">✓ Thank you — I'll be in touch soon.</div>
+  </div>
+</section>
+
+<!-- ============ 3 · LEARN MAHJONG ============ -->
+<section class="act" id="mahjong">
+  <p class="eyebrow reveal">Three · Learn Mahjong</p>
+  <h2 class="reveal d1" style="font-size:clamp(1.9rem,4.8vw,2.9rem);color:var(--ivory);margin:10px 0 12px">
+    Curious about the game that inspired the book?
+  </h2>
+  <p class="lead reveal d2" style="margin-bottom:34px">
+    Resources, workshops, and recommendations for players who are curious about the game that inspired the book.
+  </p>
+
+  <div class="resources">
+    <a class="res reveal d1" href="assets/resources/American-Mahjong-Glossary.pdf" target="_blank" rel="noopener">
+      <span class="rt">Glossary</span>
+      <span class="rd">Every word you'll hear at an American Mahjong table, A to Z, in plain English.</span>
+      <span class="tag">Read the glossary ↓</span>
+    </a>
+    <a class="res reveal d1" href="assets/resources/Mahjong-Etiquette.pdf" target="_blank" rel="noopener">
+      <span class="rt">Etiquette</span>
+      <span class="rd">The do's and don'ts of the table — the unwritten rules that matter far beyond the game.</span>
+      <span class="tag">Read the do's &amp; don'ts ↓</span>
+    </a>
+    <a class="res reveal d2" href="assets/resources/Strategic-Mahjong-Principles.pdf" target="_blank" rel="noopener">
+      <span class="rt">Strategic Principles</span>
+      <span class="rd">How strong players think — the Charleston, reading discards, narrowing your options, and knowing when to pivot.</span>
+      <span class="tag">Read the guide ↓</span>
+    </a>
+    <div class="res reveal d2">
+      <span class="rt">Quick Start Guide</span>
+      <span class="rd">Everything you need to sit down at your first table without feeling lost.</span>
+      <span class="tag soon">Coming soon</span>
+    </div>
+  </div>
+
+  <div class="capture reveal" style="margin-top:40px">
+    <p class="lead" style="margin-bottom:16px">Want the quick start guide the moment it's ready — plus workshop dates as they're announced?</p>
+    <form data-capture data-source="Learn Mahjong — resources">
+      <div class="fields">
+        <input type="text" name="Name" placeholder="Your name" aria-label="Your name">
+        <input type="email" name="Email" placeholder="your@email.com" required aria-label="Your email">
+      </div>
+      <div class="fields" style="margin-top:10px">
+        <button type="submit" class="btn btn-red" style="flex:1">Send Me the Resources →</button>
+      </div>
+      <p class="note">You'll be first to get each new guide as it's published.</p>
+    </form>
+    <div class="form-ok">✓ Thank you — the resources will land in your inbox as they're released.</div>
+  </div>
+</section>
+
+<!-- ============ 4 · JOIN THE LAUNCH LIST ============ -->
+<section class="act" id="launch">
+  <p class="eyebrow reveal">Four · Join the Launch List</p>
+  <h2 class="reveal d1" style="font-size:clamp(1.9rem,4.8vw,2.9rem);color:var(--ivory);margin:10px 0 12px">
+    Follow the journey.
+  </h2>
+  <p class="lead reveal d2">
+    Receive leadership insights, book updates, speaking announcements, and exclusive content as we approach launch—and beyond.
+  </p>
+  <div class="btn-row reveal d2">
+    <a href="launch.html" class="btn btn-red">Join the Launch List →</a>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="act tight">
+  <p class="closing reveal">Leadership is a journey.</p>
+  <p class="closing reveal d1" style="margin-top:16px;max-width:30ch">
+    Let's simplify it—<span class="g">one conversation, one decision, and one tile at a time.</span>
+  </p>
+</section>
+
+<footer>
+  <a class="brand serif" href="index.html">Maureen A. Cahill</a>
+  <div class="footlinks">
+    <a href="index.html">Home</a><a href="about.html">About Maureen</a><a href="book.html">The Book</a>
+    <a href="start.html">Let's Get Started</a><a href="launch.html">Join the Launch List</a>
+  </div>
+  Executive Coaching · Speaking · Facilitation · Author
+</footer>
+
+<script src="assets/site.js"></script>
+<script src="assets/game.js"></script>
+</body>
+</html>
