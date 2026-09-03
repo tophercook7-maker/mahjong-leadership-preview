@@ -12,17 +12,57 @@ const PHASES = [
 ];
 
 const LESSONS = [
-  { p:0, g:'一', n:1,  t:"Curate the Environment",            tip:"Before the first tile is drawn, the table is already set. Shape the conditions so the right moves become possible." },
-  { p:0, g:'二', n:2,  t:"Learn the Rules of the Game",       tip:"You can't win a game you don't understand. Master the real rules — written and unwritten — first." },
-  { p:0, g:'三', n:3,  t:"Ground Your Team in Ritual",        tip:"Rituals turn a group into a team. Small, repeated practices build trust and rhythm." },
-  { p:1, g:'中', n:4,  t:"Harness the Power of Observation",  tip:"The best players watch more than they move. Read the table before you act." },
-  { p:1, g:'發', n:5,  t:"Regulate Emotions",                 tip:"Your face is part of your hand. Composure keeps your options — and your team — steady." },
-  { p:2, g:'東', n:6,  t:"Master the Art of the Pivot",       tip:"The hand you planned rarely survives the first draw. Change direction without losing your center." },
-  { p:2, g:'南', n:7,  t:"Balance Offense and Defense",       tip:"Know when to press and when to protect. Chasing the win while ignoring risk loses games." },
-  { p:3, g:'西', n:8,  t:"Celebrate Every Win",               tip:"Naming small wins builds the momentum that reaches the big ones." },
-  { p:3, g:'北', n:9,  t:"Learn from Better Players",         tip:"Every stronger player at the table is a lesson you couldn't teach yourself." },
-  { p:3, g:'八', n:10, t:"Foster Connection",                 tip:"The game outlasts any hand because of the people around the table. Connection is the long game." }
+  { p:0, g:'一', n:1,  t:"Curate the Environment",            tip:"Before play begins, the table is already set. Leaders create the conditions in which people succeed." },
+  { p:0, g:'二', n:2,  t:"Learn the Rules of the Game",       tip:"You can't build a winning hand without understanding the rules. Leaders must learn both the written and unwritten rules." },
+  { p:0, g:'三', n:3,  t:"Ground Your Team in Ritual",        tip:"Every hand begins with familiar rituals. Leaders use consistent routines to create clarity, trust, and momentum." },
+  { p:1, g:'中', n:4,  t:"Harness the Power of Observation",  tip:"The best players watch the table before making their move. Leaders observe carefully before they act." },
+  { p:1, g:'發', n:5,  t:"Regulate Emotions",                 tip:"A reaction at the table can reveal more than intended. Leaders know how to reset before emotion drives their response." },
+  { p:2, g:'東', n:6,  t:"Master the Art of the Pivot",       tip:"The strongest hand is often not the one you set out to build. Leaders recognize when conditions change and adjust." },
+  { p:2, g:'南', n:7,  t:"Balance Offense and Defense",       tip:"Strong players know when to pursue a win and when to protect their hand. Leaders know when to advance and when to defend what matters." },
+  { p:3, g:'西', n:8,  t:"Celebrate Every Win",               tip:"Every “Mahjong!” is worth celebrating. Leaders build momentum by recognizing progress—large and small." },
+  { p:3, g:'北', n:9,  t:"Learn from Better Players",         tip:"Every stronger player at the table has something to teach you. Leaders grow when they are willing to learn." },
+  { p:3, g:'八', n:10, t:"Foster Connection",                 tip:"The tiles may bring people to the table, but connection is what keeps them coming back." }
 ];
+
+/* ---- launch switch ----
+   Flip to true on launch day: the nav's "Join the Launch List" becomes
+   "Reader Resources", and launch.html re-titles itself "Stay Connected". */
+const BOOK_LAUNCHED = false;
+
+/* ---- reader resources ----
+   The permanent return link readers receive by email. Not a password —
+   the library is a lead-capture gate, not a vault.                     */
+const READER_LINK = 'https://maureenacahill.com/resources?access=reader';
+const READER_KEY  = 'agml_reader';
+
+/* ---- download / event tracking ----
+   Set GOATCOUNTER_SITE to e.g. 'maureenacahill' after creating a free
+   GoatCounter account (goatcounter.com) and every form completion and
+   resource download shows up in its dashboard. Empty = tracking off.  */
+const GOATCOUNTER_SITE = '';
+
+function track(name){
+  try {
+    if (window.goatcounter && goatcounter.count) goatcounter.count({ path: name, title: name, event: true });
+    if (window.gtag) gtag('event', name);
+  } catch(e){}
+}
+
+function loadTracking(){
+  if (!GOATCOUNTER_SITE) return;
+  const sc = document.createElement('script');
+  sc.async = true;
+  sc.dataset.goatcounter = `https://${GOATCOUNTER_SITE}.goatcounter.com/count`;
+  sc.src = 'https://gc.zgo.at/count.js';
+  document.head.appendChild(sc);
+}
+
+function applyLaunchState(){
+  if (!BOOK_LAUNCHED) return;
+  document.querySelectorAll('a[href="launch.html"].nav-cta').forEach(a => { a.textContent = 'Reader Resources'; a.href = 'resources.html'; });
+  document.querySelectorAll('[data-prelaunch]').forEach(el => el.hidden = true);
+  document.querySelectorAll('[data-launched]').forEach(el => el.hidden = false);
+}
 
 /* ---- mobile menu ---- */
 function toggleMenu(){
@@ -105,6 +145,83 @@ function submitCapture(e){
   return false;
 }
 
+/* ---- reader resources form (rendered wherever <div data-reader-form> appears) ----
+   NOTE: this one posts natively (not AJAX). FormSubmit only sends the _autoresponse
+   welcome email — the reader's permanent link — on a native POST with captcha ON.
+   Flow: submit → FormSubmit's one-click "I'm human" page → _next back to the library. */
+const READER_POST = 'https://formsubmit.co/mkennedycahill@gmail.com';
+
+function welcomeText(first){
+  return `Hi ${first || 'there'},
+
+Welcome to the reader resource library for Ancient Game. Modern Leadership.
+
+Your permanent link — bookmark it and return any time:
+${READER_LINK}
+
+Inside you'll find the ten leadership frameworks, the bonus chapter, and the "Put It into Play" worksheets, with new material added as it's released.
+
+Start with the parallel that most closely reflects a challenge you're facing today.
+
+~ Maureen
+maureenacahill.com`;
+}
+
+function renderReaderForm(host){
+  const source = host.dataset.source || 'Reader Resources';
+  const next = new URL('resources.html?access=reader&welcome=1', location.href).href;
+  host.classList.add('capture');
+  host.innerHTML = `
+    <form data-reader data-source="${source}" method="POST" action="${READER_POST}" novalidate>
+      <input type="hidden" name="_subject" value="Book Reader Resources">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_autoresponse" value="">
+      <input type="hidden" name="_next" value="${next}">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="Tag" value="Book Reader Resources">
+      <input type="hidden" name="Source" value="${source}">
+      <div class="fields">
+        <input type="text" name="First name" placeholder="First name" required aria-label="First name" autocomplete="given-name">
+        <input type="text" name="Last name" placeholder="Last name" required aria-label="Last name" autocomplete="family-name">
+      </div>
+      <div class="fields" style="margin-top:10px">
+        <input type="email" name="email" placeholder="Email address" required aria-label="Email address" autocomplete="email">
+      </div>
+      <div class="fields" style="margin-top:12px">
+        <button type="submit" class="btn btn-red" style="flex:1">Unlock the Reader Resources</button>
+      </div>
+      <p class="note">You'll receive immediate access, along with a link you can use to return at any time.</p>
+      <label class="check">
+        <input type="checkbox" name="Leadership updates opt-in" value="Yes">
+        <span>Yes, I'd also like to receive occasional leadership insights, resources, and updates from Maureen.</span>
+      </label>
+      <p class="form-err" hidden>Please add your first name, last name, and a valid email address.</p>
+    </form>`;
+  host.querySelector('form').addEventListener('submit', submitReaderForm);
+}
+
+function submitReaderForm(e){
+  const form = e.target;
+  const err  = form.querySelector('.form-err');
+  const first = form.elements['First name'].value.trim();
+  const last  = form.elements['Last name'].value.trim();
+  const email = form.elements['email'].value.trim();
+  if (!first || !last || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
+    e.preventDefault(); err.hidden = false; return false;
+  }
+  err.hidden = true;
+  // unchecked boxes aren't posted — send an explicit No so her inbox table always shows the answer
+  const box = form.elements['Leadership updates opt-in'];
+  if (!box.checked){ box.type = 'hidden'; box.value = 'No'; }
+  form.elements['_subject'].value = `Book Reader Resources — ${first} ${last}`;
+  form.elements['_autoresponse'].value = welcomeText(first);
+  const btn = form.querySelector('button[type=submit]');
+  btn.disabled = true; btn.textContent = 'Unlocking…';
+  try { localStorage.setItem(READER_KEY, '1'); } catch(_){}
+  track('reader-signup');
+  return true; // let the browser POST; FormSubmit redirects to _next
+}
+
 /* ---- boot ---- */
 document.addEventListener('DOMContentLoaded', () => {
   observeReveals();
@@ -112,6 +229,9 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
   addEventListener('scroll', () => { if (!ticking){ requestAnimationFrame(onScroll); ticking = true; } });
   document.querySelectorAll('form[data-capture]').forEach(f => f.addEventListener('submit', submitCapture));
+  document.querySelectorAll('[data-reader-form]').forEach(renderReaderForm);
+  applyLaunchState();
+  loadTracking();
   // close mobile menu on navigation tap
   document.querySelectorAll('#navlinks a').forEach(a => a.addEventListener('click', () => {
     const links = document.getElementById('navlinks');
