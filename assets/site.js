@@ -35,6 +35,18 @@ const BOOK_LAUNCHED = false;
 const READER_LINK = 'https://maureenacahill.com/resources?access=reader';
 const READER_KEY  = 'agml_reader';
 
+/* ---- free chapter (punch list 2.1) ----
+   Drop the PDF in assets/resources/ and put its path here. While this is
+   empty the button collects the email instead of promising a file we
+   can't yet deliver. One line to flip on the day Maureen sends it.   */
+const FREE_CHAPTER = '';
+
+/* ---- Google Analytics (punch list 5.1) ----
+   Paste the GA4 Measurement ID (looks like 'G-XXXXXXXXXX') from
+   analytics.google.com once the property exists. Empty = no script
+   loads at all, so the page stays clean until it's real.            */
+const GA_ID = '';
+
 /* ---- download / event tracking ----
    Set GOATCOUNTER_SITE to e.g. 'maureenacahill' after creating a free
    GoatCounter account (goatcounter.com) and every form completion and
@@ -49,12 +61,34 @@ function track(name){
 }
 
 function loadTracking(){
+  if (GA_ID){
+    const ga = document.createElement('script');
+    ga.async = true;
+    ga.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    document.head.appendChild(ga);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  }
   if (!GOATCOUNTER_SITE) return;
   const sc = document.createElement('script');
   sc.async = true;
   sc.dataset.goatcounter = `https://${GOATCOUNTER_SITE}.goatcounter.com/count`;
   sc.src = 'https://gc.zgo.at/count.js';
   document.head.appendChild(sc);
+}
+
+/* ---- free-chapter button: real download once the PDF exists ---- */
+function applyFreeChapter(){
+  document.querySelectorAll('[data-free-chapter]').forEach(a => {
+    if (FREE_CHAPTER){
+      a.href = FREE_CHAPTER;
+      a.setAttribute('download', '');
+      a.textContent = 'Free Chapter Download \u2193';
+    }
+    a.addEventListener('click', () => track('free-chapter'));
+  });
 }
 
 function applyLaunchState(){
@@ -231,6 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('form[data-capture]').forEach(f => f.addEventListener('submit', submitCapture));
   document.querySelectorAll('[data-reader-form]').forEach(renderReaderForm);
   applyLaunchState();
+  applyFreeChapter();
   loadTracking();
   // close mobile menu on navigation tap
   document.querySelectorAll('#navlinks a').forEach(a => a.addEventListener('click', () => {

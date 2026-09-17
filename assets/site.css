@@ -325,3 +325,38 @@ footer .brand{display:block;margin-bottom:10px;font-size:1.35rem;color:var(--ivo
 .footlinks a:hover{color:var(--gold)}
 .closing{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,3.4vw,2.1rem);color:var(--ivory);line-height:1.45;max-width:24ch;margin:0 auto}
 .closing .g{color:var(--gold);font-style:italic}
+
+/* ---------- footer social (3.1) ---------- */
+.footsocial{display:flex;justify-content:center;gap:14px;margin:0 0 18px}
+.footsocial a{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+  color:#b0a99a;border:1px solid rgba(255,255,255,.14);transition:.25s}
+.footsocial a:hover{color:var(--gold);border-color:var(--gold);transform:translateY(-2px)}
+
+/* ---------- FAQ accordion (2.4) ----------
+   Answers live in the HTML on load and are hidden with CSS only —
+   crawlers and AI answer engines read them without running our JS. */
+.faq{width:100%;max-width:820px;margin-top:26px;text-align:left}
+.faq details{border-bottom:1px solid rgba(255,255,255,.1)}
+.faq details[open]{background:rgba(255,255,255,.02)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 44px 20px 4px;position:relative;
+  font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.12rem,2.3vw,1.4rem);
+  font-weight:600;line-height:1.3;color:var(--ivory);transition:color .25s;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover,.faq details[open] summary{color:var(--gold)}
+.faq summary::after{content:"+";position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  font-family:'Inter',sans-serif;font-size:1.5rem;font-weight:300;color:var(--gold);transition:transform .25s}
+.faq details[open] summary::after{content:"\2212"}
+.faq summary h3{font:inherit;color:inherit;margin:0;display:inline}
+.faq .a{padding:0 44px 22px 4px;color:var(--muted);font-size:clamp(.95rem,1.9vw,1rem)}
+.faq .a p+p{margin-top:12px}
+.faq .a a{color:var(--gold);border-bottom:1px solid rgba(200,162,95,.4)}
+.faq .a ol{margin:12px 0 0 20px}
+.faq .a ol li{margin-bottom:6px}
+
+/* ---------- top-of-page CTA band (2.1) ---------- */
+.cta-band{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center;margin-top:26px}
+.cta-band .btn{margin:0}
+.cta-note{width:100%;text-align:center;color:var(--muted);font-size:.82rem;margin-top:4px}
+.jump{display:inline-block;margin-top:16px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);border-bottom:1px solid rgba(200,162,95,.35);padding-bottom:2px}
+.jump:hover{color:var(--gold);border-color:var(--gold)}

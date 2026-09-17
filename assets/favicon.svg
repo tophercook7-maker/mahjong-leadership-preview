@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Maureen A. Cahill">
+  <rect width="64" height="64" rx="12" fill="#0a1a11"/>
+  <rect x="12" y="7" width="40" height="50" rx="7" fill="#f6f1e6"/>
+  <rect x="12" y="49" width="40" height="8" rx="4" fill="#cdbfa2"/>
+  <circle cx="32" cy="30" r="15" fill="none" stroke="#c8a25f" stroke-width="2.4"/>
+  <circle cx="32" cy="30" r="8.5" fill="#b5322a"/>
+  <circle cx="32" cy="30" r="3.4" fill="#f6f1e6"/>
+</svg>

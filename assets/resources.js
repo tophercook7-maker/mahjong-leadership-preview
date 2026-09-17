@@ -14,7 +14,7 @@
 const BONUS = {
   title: 'The Bonus Chapter',
   desc:  'An additional parallel written for readers of the book.',   // Maureen will supply the description
-  file:  ''                                                            // e.g. 'assets/resources/AGML-Bonus-Chapter.pdf'
+  file:  ''                                                            // e.g. 'assets/resources/Ancient-Game-Modern-Leadership-Bonus-Chapter.pdf'
 };
 
 const WORKSHEETS = [
