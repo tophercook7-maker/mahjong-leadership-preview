@@ -132,7 +132,7 @@ nav.solid{background:rgba(10,26,17,.82);backdrop-filter:blur(12px);padding-top:1
 .lesson p{font-size:.9rem;color:var(--muted)}
 
 /* pathway cards (Let's Get Started) */
-.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(18px,2.6vw,28px);
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:clamp(18px,2.6vw,28px);
   max-width:1100px;width:100%;margin-top:8px;text-align:left}
 .path{border-radius:18px;padding:32px 28px;position:relative;overflow:hidden;
   background:linear-gradient(155deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
@@ -205,7 +205,7 @@ nav.solid{background:rgba(10,26,17,.82);backdrop-filter:blur(12px);padding-top:1
 .lib{max-width:1040px;width:100%;text-align:left}
 .lib h2{font-size:clamp(1.8rem,4.4vw,2.6rem);color:var(--ivory);margin:6px 0 8px}
 .lib .sub{color:var(--muted);max-width:60ch;margin-bottom:26px}
-.lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;width:100%}
+.lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:14px;width:100%}
 .lib-item{display:flex;flex-direction:column;gap:6px;padding:20px 22px;border-radius:12px;
   background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
 .lib-item.ready{border-color:rgba(200,162,95,.35)}
@@ -372,7 +372,7 @@ footer .brand{display:block;margin-bottom:10px;font-size:1.35rem;color:var(--ivo
 .pullquote cite span{display:block;margin-top:7px;letter-spacing:.03em;text-transform:none;
   font-size:.84rem;color:var(--muted)}
 
-.endorsements{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+.endorsements{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));
   gap:clamp(20px,3.5vw,40px);width:100%;max-width:1000px;margin-top:26px;text-align:left}
 .endorse{display:flex;flex-direction:column;padding:28px 26px;border-radius:14px;
   border:1px solid rgba(200,162,95,.22);background:rgba(255,255,255,.03);margin:0}
