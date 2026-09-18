@@ -45,7 +45,7 @@ const FREE_CHAPTER = 'assets/resources/Ancient-Game-Modern-Leadership-Sample-Cha
    Paste the GA4 Measurement ID (looks like 'G-XXXXXXXXXX') from
    analytics.google.com once the property exists. Empty = no script
    loads at all, so the page stays clean until it's real.            */
-const GA_ID = '';
+const GA_ID = 'G-0BPBECS5EC';
 
 /* ---- download / event tracking ----
    Set GOATCOUNTER_SITE to e.g. 'maureenacahill' after creating a free
