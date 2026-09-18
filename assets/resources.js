@@ -12,9 +12,9 @@
      one fillable PDF.
    ============================================================ */
 const BONUS = {
-  title: 'The Bonus Chapter',
-  desc:  'An additional parallel written for readers of the book.',   // Maureen will supply the description
-  file:  ''                                                            // e.g. 'assets/resources/Ancient-Game-Modern-Leadership-Bonus-Chapter.pdf'
+  title: 'Sample Chapter \u2014 Parallel Six: Master the Art of the Pivot',
+  desc:  'A full chapter from Ancient Game. Modern Leadership. \u2014 a leadership reality, a story from the Mahjong table, reflection questions, and actions you can use this week.',
+  file:  'assets/resources/Ancient-Game-Modern-Leadership-Sample-Chapter.pdf'
 };
 
 const WORKSHEETS = [

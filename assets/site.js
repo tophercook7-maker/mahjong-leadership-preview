@@ -39,7 +39,7 @@ const READER_KEY  = 'agml_reader';
    Drop the PDF in assets/resources/ and put its path here. While this is
    empty the button collects the email instead of promising a file we
    can't yet deliver. One line to flip on the day Maureen sends it.   */
-const FREE_CHAPTER = '';
+const FREE_CHAPTER = 'assets/resources/Ancient-Game-Modern-Leadership-Sample-Chapter.pdf';
 
 /* ---- Google Analytics (punch list 5.1) ----
    Paste the GA4 Measurement ID (looks like 'G-XXXXXXXXXX') from
@@ -147,73 +147,125 @@ function buildFloaters(){
   }, { passive: true });
 }
 
-/* ---- contact capture -> FormSubmit (goes to Maureen's inbox) ----
-   Every form on the site routes here. data-source tells her WHICH
-   page/section the person signed up from.                         */
-const LIST_ENDPOINT = 'https://formsubmit.co/ajax/mkennedycahill@gmail.com';
+/* ============================================================
+   SIGNUPS -> MAILERLITE   (punch list 1.1)
+   ------------------------------------------------------------
+   Replaces FormSubmit. These are MailerLite's public form
+   endpoints: no API key, safe to call from the browser, so we
+   keep Maureen's own form markup and styling and only change
+   where it posts.
+
+   Each form posts to the endpoint for its group, so she can
+   still see which page someone came from — Launch List,
+   Reader Resources, or Work With Me.
+
+   All three use double opt-in: the subscriber gets a
+   confirmation email from maureen@maureenacahill.com and only
+   joins the list once they click it.
+   ============================================================ */
+const ML_ACCOUNT = '2644986';
+const ML_FORMS = {
+  'launch':    '198985867271865777',
+  'reader':    '198989675981965097',
+  'work':      '198989762204271982'
+};
+const ML_DEFAULT = 'launch';
+
+function mlEndpoint(key){
+  const id = ML_FORMS[key] || ML_FORMS[ML_DEFAULT];
+  return `https://assets.mailerlite.com/jsonp/${ML_ACCOUNT}/forms/${id}/subscribe`;
+}
+
+/* Which MailerLite group a form belongs to. Set explicitly with
+   data-list="reader|work|launch"; otherwise inferred from the
+   data-source label the page already carries. */
+function mlListFor(form){
+  if (form.dataset.list) return form.dataset.list;
+  const src = (form.dataset.source || '').toLowerCase();
+  if (src.includes('reader') || src.includes('resource')) return 'reader';
+  if (src.includes('work with me') || src.includes('inquiry')) return 'work';
+  return 'launch';
+}
+
+/* Split a single "name" field into first/last for MailerLite. */
+function splitName(full){
+  const parts = (full || '').trim().split(/\s+/).filter(Boolean);
+  return { first: parts.shift() || '', last: parts.join(' ') };
+}
+
+/* POST to MailerLite. Resolves true on success. */
+function mlSubscribe(list, { email, first, last, source }){
+  const body = new URLSearchParams();
+  body.set('fields[email]', email);
+  if (first) body.set('fields[name]', first);
+  if (last)  body.set('fields[last_name]', last);
+  body.set('ml-submit', '1');
+  body.set('anticsrf', 'true');
+  track('signup:' + (source || list));
+  return fetch(mlEndpoint(list), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body.toString()
+  }).then(r => r.json()).then(d => !!(d && d.success)).catch(() => false);
+}
 
 function submitCapture(e){
   e.preventDefault();
-  const form = e.target;
-  const wrap = form.closest('.capture');
-  const btn  = form.querySelector('button[type=submit]');
+  const form   = e.target;
+  const wrap   = form.closest('.capture');
+  const btn    = form.querySelector('button[type=submit]');
   const source = form.dataset.source || 'Website';
+  const list   = mlListFor(form);
 
-  const payload = { _subject: 'maureenacahill.com — ' + source, _template: 'table', _captcha: 'false', Source: source };
-  new FormData(form).forEach((v, k) => { if (!k.startsWith('_')) payload[k] = v; });
+  const data  = new FormData(form);
+  const email = (data.get('Email') || data.get('email') || '').trim();
+  const { first, last } = splitName(data.get('Name') || data.get('name'));
 
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
+    const inp = form.querySelector('input[type=email]');
+    if (inp){ inp.focus(); inp.setCustomValidity('Please enter a valid email address.'); inp.reportValidity(); 
+              inp.addEventListener('input', () => inp.setCustomValidity(''), { once:true }); }
+    return false;
+  }
+
+  const original = btn ? btn.textContent : '';
   if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
 
-  const done = () => {
-    wrap.classList.add('sent');
-    const ok = wrap.querySelector('.form-ok');
-    if (ok) ok.classList.add('show');
-  };
-
-  fetch(LIST_ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify(payload)
-  }).then(r => r.json()).then(done).catch(done);
+  mlSubscribe(list, { email, first, last, source }).then(ok => {
+    if (ok){
+      wrap.classList.add('sent');
+      const done = wrap.querySelector('.form-ok');
+      if (done) done.classList.add('show');
+    } else {
+      if (btn){ btn.disabled = false; btn.textContent = original; }
+      let err = wrap.querySelector('.form-err');
+      if (!err){
+        err = document.createElement('p');
+        err.className = 'form-err';
+        wrap.appendChild(err);
+      }
+      err.hidden = false;
+      err.textContent = 'Something went wrong — please try again, or email maureen@maureenacahill.com.';
+    }
+  });
 
   return false;
 }
 
 /* ---- reader resources form (rendered wherever <div data-reader-form> appears) ----
-   NOTE: this one posts natively (not AJAX). FormSubmit only sends the _autoresponse
-   welcome email — the reader's permanent link — on a native POST with captcha ON.
-   Flow: submit → FormSubmit's one-click "I'm human" page → _next back to the library. */
-const READER_POST = 'https://formsubmit.co/mkennedycahill@gmail.com';
+   Now posts to MailerLite's Reader Resources group by AJAX, so the reader
+   stays on the page. MailerLite sends the confirmation email from
+   maureen@maureenacahill.com; clicking it adds them to the list.
 
-function welcomeText(first){
-  return `Hi ${first || 'there'},
-
-Welcome to the reader resource library for Ancient Game. Modern Leadership.
-
-Your permanent link — bookmark it and return any time:
-${READER_LINK}
-
-Inside you'll find the ten leadership frameworks, the bonus chapter, and the "Put It into Play" worksheets, with new material added as it's released.
-
-Start with the parallel that most closely reflects a challenge you're facing today.
-
-~ Maureen
-maureenacahill.com`;
-}
+   The old FormSubmit native-POST hack is gone — it bounced readers through a
+   third-party "confirm you're human" page mid-signup, and its welcome email
+   was never verified as actually arriving. */
 
 function renderReaderForm(host){
   const source = host.dataset.source || 'Reader Resources';
-  const next = new URL('resources.html?access=reader&welcome=1', location.href).href;
   host.classList.add('capture');
   host.innerHTML = `
-    <form data-reader data-source="${source}" method="POST" action="${READER_POST}" novalidate>
-      <input type="hidden" name="_subject" value="Book Reader Resources">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_autoresponse" value="">
-      <input type="hidden" name="_next" value="${next}">
-      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-      <input type="hidden" name="Tag" value="Book Reader Resources">
-      <input type="hidden" name="Source" value="${source}">
+    <form data-reader data-list="reader" data-source="${source}" novalidate>
       <div class="fields">
         <input type="text" name="First name" placeholder="First name" required aria-label="First name" autocomplete="given-name">
         <input type="text" name="Last name" placeholder="Last name" required aria-label="Last name" autocomplete="family-name">
@@ -222,38 +274,54 @@ function renderReaderForm(host){
         <input type="email" name="email" placeholder="Email address" required aria-label="Email address" autocomplete="email">
       </div>
       <div class="fields" style="margin-top:12px">
-        <button type="submit" class="btn btn-red" style="flex:1">Unlock the Reader Resources</button>
+        <button type="submit" class="btn btn-red" style="flex:1">Send Me the Reader Resources</button>
       </div>
-      <p class="note">You'll receive immediate access, along with a link you can use to return at any time.</p>
-      <label class="check">
-        <input type="checkbox" name="Leadership updates opt-in" value="Yes">
-        <span>Yes, I'd also like to receive occasional leadership insights, resources, and updates from Maureen.</span>
-      </label>
+      <p class="note">We'll email you a confirmation link. Click it and your resource library opens \u2014 plus a link you can return to any time.</p>
       <p class="form-err" hidden>Please add your first name, last name, and a valid email address.</p>
     </form>`;
   host.querySelector('form').addEventListener('submit', submitReaderForm);
 }
 
 function submitReaderForm(e){
-  const form = e.target;
-  const err  = form.querySelector('.form-err');
+  e.preventDefault();
+  const form  = e.target;
+  const wrap  = form.closest('.capture');
+  const err   = form.querySelector('.form-err');
   const first = form.elements['First name'].value.trim();
   const last  = form.elements['Last name'].value.trim();
   const email = form.elements['email'].value.trim();
+
   if (!first || !last || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
-    e.preventDefault(); err.hidden = false; return false;
+    err.hidden = false;
+    return false;
   }
   err.hidden = true;
-  // unchecked boxes aren't posted — send an explicit No so her inbox table always shows the answer
-  const box = form.elements['Leadership updates opt-in'];
-  if (!box.checked){ box.type = 'hidden'; box.value = 'No'; }
-  form.elements['_subject'].value = `Book Reader Resources — ${first} ${last}`;
-  form.elements['_autoresponse'].value = welcomeText(first);
+
   const btn = form.querySelector('button[type=submit]');
-  btn.disabled = true; btn.textContent = 'Unlocking…';
-  try { localStorage.setItem(READER_KEY, '1'); } catch(_){}
-  track('reader-signup');
-  return true; // let the browser POST; FormSubmit redirects to _next
+  const original = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Sending\u2026';
+
+  mlSubscribe('reader', { email, first, last, source: form.dataset.source }).then(ok => {
+    if (ok){
+      // remember them locally so a returning reader isn't re-gated on this device
+      try { localStorage.setItem(READER_KEY, '1'); } catch(_){}
+      wrap.classList.add('sent');
+      const done = wrap.querySelector('.form-ok');
+      if (done){
+        done.classList.add('show');
+      } else {
+        const p = document.createElement('div');
+        p.className = 'form-ok show';
+        p.innerHTML = `\u2713 Check your email \u2014 we've sent <strong>${email}</strong> a confirmation link. Click it and your resources open right up.`;
+        wrap.appendChild(p);
+      }
+    } else {
+      btn.disabled = false; btn.textContent = original;
+      err.hidden = false;
+      err.textContent = 'Something went wrong \u2014 please try again, or email maureen@maureenacahill.com.';
+    }
+  });
+  return false;
 }
 
 /* ---- boot ---- */
