@@ -1,0 +1,8 @@
+wrangler.jsonc
+.assetsignore
+worker
+tools
+CNAME
+.gitignore
+.vercel
+.git

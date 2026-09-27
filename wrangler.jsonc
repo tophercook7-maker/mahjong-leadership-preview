@@ -1,0 +1,14 @@
+{
+  // Static site on Workers static assets. Deploy:  wrangler deploy
+  "name": "maureenacahill-site",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    // No automatic rewriting — worker/index.js owns the URL mapping so that
+    // /book.html stays a 200 instead of a 308 to /book.
+    "html_handling": "none",
+    "not_found_handling": "none"
+  }
+}

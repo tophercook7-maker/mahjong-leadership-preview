@@ -1,0 +1,19 @@
+# Cloudflare Pages reads this file; GitHub Pages ignores it, so it is safe to
+# keep in the repo during the move.
+#
+# HSTS is the one thing GitHub Pages could not do — it serves no custom
+# headers at all — and it was the last point standing between this site and a
+# clean audit. No `preload` on purpose: that flag is a one-way door (removal
+# takes months and a submission to the browser preload list), and it is not
+# my domain to commit on her behalf.
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# Fingerprinted, immutable assets. The HTML stays uncached so a deploy is
+# visible immediately; only the heavy static files are held.
+/assets/*
+  Cache-Control: public, max-age=604800
