@@ -79,16 +79,120 @@ function loadTracking(){
   document.head.appendChild(sc);
 }
 
-/* ---- free-chapter button: real download once the PDF exists ---- */
+/* ---- free-chapter: capture the reader, then hand over the chapter ----
+   Nancy's 21 Sept request. Until now the PDF downloaded straight away and we
+   learned nothing about who took it, which in the run-up to a launch is the
+   expensive part.
+
+   The chapter is never withheld. The link appears the moment the form is
+   submitted, whether or not MailerLite has finished its own confirmation
+   round-trip — somebody who just gave us their address should not be left
+   waiting on an email to read the thing they were promised. The email is a
+   bonus, not the delivery mechanism, so the page cannot end up promising
+   something the mail never does. */
+function readerKnown(){
+  try { return localStorage.getItem(READER_KEY) === '1'; } catch(_){ return false; }
+}
+
 function applyFreeChapter(){
   document.querySelectorAll('[data-free-chapter]').forEach(a => {
-    if (FREE_CHAPTER){
-      a.href = FREE_CHAPTER;
+    if (!FREE_CHAPTER) return;
+    a.href = FREE_CHAPTER;
+    a.textContent = 'Free Chapter Download ↓';
+    if (readerKnown()){
+      // Already on the list from this device — don't make them ask twice.
       a.setAttribute('download', '');
-      a.textContent = 'Free Chapter Download \u2193';
+      a.addEventListener('click', () => track('free-chapter'));
+      return;
     }
-    a.addEventListener('click', () => track('free-chapter'));
+    a.removeAttribute('download');
+    a.addEventListener('click', e => { e.preventDefault(); openChapterGate(a); });
   });
+}
+
+function openChapterGate(btn){
+  const existing = document.getElementById('chapter-gate');
+  if (existing){
+    existing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const f = existing.querySelector('input'); if (f) f.focus();
+    return;
+  }
+  track('free-chapter-gate');
+  const band = btn.closest('.cta-band') || btn.parentElement;
+  const gate = document.createElement('div');
+  gate.id = 'chapter-gate';
+  gate.className = 'capture chapter-gate';
+  gate.innerHTML = `
+    <p class="gate-lead">Where should I send it?</p>
+    <form data-chapter novalidate>
+      <div class="fields">
+        <input type="text" name="First name" placeholder="First name" required aria-label="First name" autocomplete="given-name">
+        <input type="text" name="Last name" placeholder="Last name" required aria-label="Last name" autocomplete="family-name">
+      </div>
+      <div class="fields" style="margin-top:10px">
+        <input type="email" name="email" placeholder="Email address" required aria-label="Email address" autocomplete="email">
+      </div>
+      <div class="fields" style="margin-top:12px">
+        <button type="submit" class="btn btn-red" style="flex:1">Send Me the Chapter</button>
+      </div>
+      <p class="note">You'll also be first to hear when the book is released. Unsubscribe any time.</p>
+      <p class="form-err" hidden>Please add your first name, last name, and a valid email address.</p>
+    </form>`;
+  band.insertAdjacentElement('afterend', gate);
+  gate.querySelector('form').addEventListener('submit', submitChapterGate);
+  const first = gate.querySelector('input'); if (first) first.focus();
+}
+
+function submitChapterGate(e){
+  e.preventDefault();
+  const form  = e.target;
+  const wrap  = form.closest('.capture');
+  const err   = form.querySelector('.form-err');
+  const first = form.elements['First name'].value.trim();
+  const last  = form.elements['Last name'].value.trim();
+  const email = form.elements['email'].value.trim();
+
+  if (!first || !last || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
+    err.hidden = false;
+    return false;
+  }
+  err.hidden = true;
+
+  const btn = form.querySelector('button[type=submit]');
+  const original = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Sending…';
+
+  // Tagged by its own source so the book page's performance is separable from
+  // every other form feeding the same list.
+  mlSubscribe('reader', { email, first, last, source: 'Sample chapter — book page' })
+    .then(ok => {
+      if (!ok){
+        btn.disabled = false; btn.textContent = original;
+        err.hidden = false;
+        return;
+      }
+      try { localStorage.setItem(READER_KEY, '1'); } catch(_){}
+      track('free-chapter-captured');
+      wrap.classList.add('sent');
+      wrap.innerHTML = `
+        <div class="form-ok show">
+          <p><strong>Thank you, ${first}.</strong> Your chapter is downloading now —
+             if nothing happens, use the link below.</p>
+          <p style="margin-top:12px">
+            <a class="btn btn-gold" href="${FREE_CHAPTER}" download data-chapter-dl>
+              Download the chapter ↓</a>
+          </p>
+          <p class="note" style="margin-top:12px">Check your email too — there may be a
+             confirmation link to click before the launch updates start arriving.</p>
+        </div>`;
+      const dl = wrap.querySelector('[data-chapter-dl]');
+      if (dl) setTimeout(() => dl.click(), 350);
+      document.querySelectorAll('[data-free-chapter]').forEach(a => {
+        a.setAttribute('download', '');
+        a.removeAttribute('data-free-chapter');
+      });
+    });
+  return false;
 }
 
 function applyLaunchState(){

@@ -399,3 +399,15 @@ footer .brand{display:block;margin-bottom:10px;font-size:1.35rem;color:var(--ivo
 .kit-item .kd{font-size:.8rem;color:var(--muted);line-height:1.45}
 .kit-item .kgo{margin-top:6px;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}
 .kit-note{margin-top:18px;font-size:.8rem;color:var(--muted)}
+
+/* Free-chapter gate. Sits inline under the CTA band rather than in a modal:
+   a dialog on a phone hides the thing the reader just asked for, and the
+   whole point is that asking costs them as little as possible. */
+.chapter-gate{max-width:520px;margin:18px auto 0;padding:20px 22px;border-radius:14px;
+  border:1px solid rgba(200,162,95,.34);background:rgba(255,255,255,.045);text-align:left}
+.chapter-gate .gate-lead{font-family:'Cormorant Garamond',serif;font-size:1.45rem;
+  color:var(--ivory);margin-bottom:14px;text-align:center}
+.chapter-gate .note{font-size:.78rem;color:var(--muted);margin-top:10px;text-align:center}
+.chapter-gate .form-err{color:#e9917f;font-size:.82rem;margin-top:10px;text-align:center}
+.chapter-gate .form-ok{text-align:center;color:var(--ivory)}
+@media(max-width:560px){ .chapter-gate{padding:16px 14px} }
