@@ -29,6 +29,15 @@ const LESSONS = [
    "Reader Resources", and launch.html re-titles itself "Stay Connected". */
 const BOOK_LAUNCHED = false;
 
+/* Where the book can actually be bought. Empty until Maureen has the Amazon
+   link — and while it is empty NOTHING changes on the page, so this can sit
+   here safely until launch day. On 20 October: paste the URL, flip
+   BOOK_LAUNCHED to true, push. That is the whole launch-day procedure.
+   Without this the site had no way to sell the book on the day it went on
+   sale; every CTA pointed at the launch list, which by then is the wrong
+   ask. */
+const BUY_LINK = '';
+
 /* ---- reader resources ----
    The permanent return link readers receive by email. Not a password —
    the library is a lead-capture gate, not a vault.                     */
@@ -196,10 +205,28 @@ function submitChapterGate(e){
 }
 
 function applyLaunchState(){
+  applyBuyLink();
   if (!BOOK_LAUNCHED) return;
   document.querySelectorAll('a[href="launch.html"].nav-cta').forEach(a => { a.textContent = 'Reader Resources'; a.href = 'resources.html'; });
   document.querySelectorAll('[data-prelaunch]').forEach(el => el.hidden = true);
   document.querySelectorAll('[data-launched]').forEach(el => el.hidden = false);
+}
+
+/* Buy buttons appear only once there is somewhere to send people. Deliberately
+   independent of BOOK_LAUNCHED: if the retailer listing goes live early, the
+   link can be switched on without changing anything else. */
+function applyBuyLink(){
+  const buys = document.querySelectorAll('[data-buy]');
+  if (!buys.length) return;
+  if (!BUY_LINK){ buys.forEach(el => { el.hidden = true; }); return; }
+  buys.forEach(el => {
+    el.href = BUY_LINK;
+    el.rel = 'noopener';
+    el.hidden = false;
+    el.addEventListener('click', () => track('buy-the-book'));
+  });
+  // Once it can be bought, "be first to know" is the wrong ask.
+  document.querySelectorAll('[data-prelaunch-cta]').forEach(el => { el.hidden = true; });
 }
 
 /* ---- mobile menu ---- */
