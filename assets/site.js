@@ -31,7 +31,7 @@ const BOOK_LAUNCHED = false;
 
 /* Where the book can actually be bought. Empty until Maureen has the Amazon
    link — and while it is empty NOTHING changes on the page, so this can sit
-   here safely until launch day. On 20 October: paste the URL, flip
+   here safely until launch day. On 27 October: paste the URL, flip
    BOOK_LAUNCHED to true, push. That is the whole launch-day procedure.
    Without this the site had no way to sell the book on the day it went on
    sale; every CTA pointed at the launch list, which by then is the wrong
