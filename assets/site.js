@@ -191,8 +191,9 @@ function submitChapterGate(e){
             <a class="btn btn-gold" href="${FREE_CHAPTER}" download data-chapter-dl>
               Download the chapter ↓</a>
           </p>
-          <p class="note" style="margin-top:12px">Check your email too — there may be a
-             confirmation link to click before the launch updates start arriving.</p>
+          <p class="note" style="margin-top:12px">Check your email too — there's a confirmation
+             link from Maureen A. Cahill (subject: “Confirmation email”) to click before the
+             launch updates start arriving. Worth a look in spam if you don't see it.</p>
         </div>`;
       const dl = wrap.querySelector('[data-chapter-dl]');
       if (dl) setTimeout(() => dl.click(), 350);
@@ -407,7 +408,7 @@ function renderReaderForm(host){
       <div class="fields" style="margin-top:12px">
         <button type="submit" class="btn btn-red" style="flex:1">Send Me the Reader Resources</button>
       </div>
-      <p class="note">We'll email you a confirmation link. Click it and your resource library opens \u2014 plus a link you can return to any time.</p>
+      <p class="note">We'll email you a confirmation link \u2014 it comes from Maureen A. Cahill with the subject \u201cConfirmation email\u201d, so check spam if it doesn't appear. Click it and your resource library opens, plus a link you can return to any time.</p>
       <p class="form-err" hidden>Please add your first name, last name, and a valid email address.</p>
     </form>`;
   host.querySelector('form').addEventListener('submit', submitReaderForm);
@@ -443,7 +444,7 @@ function submitReaderForm(e){
       } else {
         const p = document.createElement('div');
         p.className = 'form-ok show';
-        p.innerHTML = `\u2713 Check your email \u2014 we've sent <strong>${email}</strong> a confirmation link. Click it and your resources open right up.`;
+        p.innerHTML = `\u2713 Check your email \u2014 we've sent <strong>${email}</strong> a confirmation link from Maureen A. Cahill, subject \u201cConfirmation email\u201d. Click it and your resources open right up. Look in spam if it isn't there.`;
         wrap.appendChild(p);
       }
     } else {
