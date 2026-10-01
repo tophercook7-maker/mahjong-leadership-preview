@@ -185,6 +185,11 @@ nav.solid{background:rgba(10,26,17,.82);backdrop-filter:blur(12px);padding-top:1
 .btn-gold{border-color:var(--gold);color:var(--gold)}.btn-gold:hover{background:var(--gold);color:#12261a}
 .btn-ghost{border-color:rgba(255,255,255,.28);color:var(--ink)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+/* one slot in the markup, one button per retailer at runtime */
+.buy-row{display:contents}
+/* Maureen's note to independent bookshops (1 Oct) — quiet, factual, not a CTA */
+.bookstore-note{width:100%;max-width:46rem;margin:18px auto 0;text-align:center;font-size:.8rem;line-height:1.6;color:var(--muted);border-top:1px solid rgba(150,121,79,.22);padding-top:14px}
+.bookstore-note strong{color:var(--gold);font-weight:600;display:block;margin-bottom:3px;letter-spacing:.06em;text-transform:uppercase;font-size:.7rem}
 
 /* ---------- forms ---------- */
 .capture{width:100%;max-width:520px;margin:26px auto 0}

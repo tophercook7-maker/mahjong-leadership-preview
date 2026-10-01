@@ -36,7 +36,14 @@ const BOOK_LAUNCHED = false;
    Without this the site had no way to sell the book on the day it went on
    sale; every CTA pointed at the launch list, which by then is the wrong
    ask. */
-const BUY_LINK = '';
+/* Maureen confirmed the retailers on 1 Oct 2026: Amazon and Bookshop.org,
+   with Barnes & Noble possibly added later. Fill in a url and that retailer's
+   button appears; leave it empty and it stays hidden. Adding a fourth is one
+   more line — no layout work on launch morning.                            */
+const BUY_LINKS = [
+  { label: 'Buy on Amazon',      url: '' },
+  { label: 'Buy on Bookshop.org', url: '' }
+];
 
 /* ---- reader resources ----
    The permanent return link readers receive by email. Not a password —
@@ -217,15 +224,38 @@ function applyLaunchState(){
    independent of BOOK_LAUNCHED: if the retailer listing goes live early, the
    link can be switched on without changing anything else. */
 function applyBuyLink(){
-  const buys = document.querySelectorAll('[data-buy]');
-  if (!buys.length) return;
-  if (!BUY_LINK){ buys.forEach(el => { el.hidden = true; }); return; }
-  buys.forEach(el => {
-    el.href = BUY_LINK;
-    el.rel = 'noopener';
-    el.hidden = false;
-    el.addEventListener('click', () => track('buy-the-book'));
+  const live = BUY_LINKS.filter(b => b.url);
+  const slots = document.querySelectorAll('[data-buy]');
+  if (!slots.length) return;
+
+  if (!live.length){
+    // Markup can sit on the live site for weeks: no urls, nothing renders.
+    slots.forEach(el => { el.hidden = true; });
+    document.querySelectorAll('[data-bookstores]').forEach(el => { el.hidden = true; });
+    return;
+  }
+
+  slots.forEach(slot => {
+    // The slot is a placeholder <a>; replace it with one button per retailer
+    // so a second or third shop needs no new markup on any page.
+    const row = document.createElement('span');
+    row.className = 'buy-row';
+    live.forEach((b, i) => {
+      const a = document.createElement('a');
+      a.className = 'btn ' + (i === 0 ? 'btn-red' : 'btn-gold');
+      a.href = b.url;
+      a.rel = 'noopener';
+      a.target = '_blank';
+      a.textContent = b.label + ' →';
+      a.addEventListener('click', () => track('buy:' + b.label));
+      row.appendChild(a);
+    });
+    slot.replaceWith(row);
   });
+
+  // Her note to independent bookshops — only meaningful once it's on sale.
+  document.querySelectorAll('[data-bookstores]').forEach(el => { el.hidden = false; });
+
   // Once it can be bought, "be first to know" is the wrong ask.
   document.querySelectorAll('[data-prelaunch-cta]').forEach(el => { el.hidden = true; });
 }
