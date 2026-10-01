@@ -112,6 +112,14 @@ nav.solid{background:rgba(10,26,17,.82);backdrop-filter:blur(12px);padding-top:1
 .hero-tiles .t{width:clamp(54px,9vw,84px);aspect-ratio:5/7;border-radius:10px;background:linear-gradient(#f8f3e8,#e7ddc7);
   box-shadow:0 16px 34px rgba(0,0,0,.55), inset 0 -8px 0 #ccbe9f;display:flex;align-items:center;justify-content:center;
   font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:700}
+/* Hero tiles lifted from the book cover art, so the page and the jacket read
+   as one thing. drop-shadow rather than box-shadow: it follows the tile's
+   rounded silhouette instead of the transparent PNG's square bounding box.
+   Sized by height, not width: the three cut-outs differ by a few pixels of
+   aspect, so matching heights is what actually makes them sit level. */
+.hero-tiles{align-items:flex-end}
+.hero-tiles .t-cover{height:clamp(86px,14.4vw,135px);width:auto;display:block;
+  filter:drop-shadow(0 16px 26px rgba(0,0,0,.55))}
 .hook{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3.6vw,2.5rem);color:var(--ivory);
   max-width:22ch;margin:30px auto 0;line-height:1.3}
 .hook em{color:var(--gold);font-style:italic}
