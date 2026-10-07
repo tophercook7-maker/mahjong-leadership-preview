@@ -50,7 +50,7 @@
   .tagline .serif{font-style:normal}
 
   a.btn{
-    display:flex;align-items:center;gap:13px;width:100%;
+    display:flex;align-items:center;justify-content:space-between;gap:13px;width:100%;
     min-height:62px;padding:13px 17px;margin-bottom:11px;border-radius:13px;
     text-decoration:none;font-weight:500;font-size:1.02rem;line-height:1.25;
     border:1px solid rgba(243,238,226,.16);
@@ -58,7 +58,11 @@
     -webkit-tap-highlight-color:transparent;
   }
   a.btn:active{transform:scale(.988)}
-  a.btn .ico{font-size:1.32rem;width:27px;text-align:center;flex:none}
+  /* No emoji. Her brand is Cormorant, gold and dark green — eight cartoon
+     glyphs read as a different company. A thin gold chevron says "tappable"
+     without saying it loudly. */
+  a.btn::after{content:"\203A";color:var(--gold);font-size:1.5rem;line-height:1;opacity:.55;flex:none}
+  a.gold::after,a.red::after{color:inherit;opacity:.5}
   a.btn .sub{display:block;font-weight:400;font-size:.775rem;color:var(--muted);margin-top:2px}
   a.gold{background:linear-gradient(180deg,#d6b473,var(--gold));color:#2a1f08;border-color:#b3904f}
   a.gold .sub{color:#4a3a14}
@@ -103,13 +107,11 @@
   </header>
 
   <a class="btn gold" href="/assets/maureen-a-cahill.vcf">
-    <span class="ico">👤</span>
     <span>Save my contact
       <span class="sub">Straight into your phone</span></span>
   </a>
 
   <a class="btn" href="mailto:maureen@maureenacahill.com">
-    <span class="ico">✉️</span>
     <span>Email me
       <span class="sub">maureen@maureenacahill.com</span></span>
   </a>
@@ -131,19 +133,16 @@
   </div>
 
   <a class="btn" href="/book.html">
-    <span class="ico">📖</span>
     <span>About the book
       <span class="sub">What it's about, and who it's for</span></span>
   </a>
 
   <a class="btn gold" href="/launch.html" data-prelaunch-cta>
-    <span class="ico">🔔</span>
     <span>Tell me when it's out
       <span class="sub">Join the launch list</span></span>
   </a>
 
   <a class="btn" href="/resources.html">
-    <span class="ico">🎁</span>
     <span>Reader resources
       <span class="sub">Companion material for the book</span></span>
   </a>
@@ -151,19 +150,16 @@
   <h2>Work with me</h2>
 
   <a class="btn" href="/start.html">
-    <span class="ico">🎤</span>
     <span>Speaking &amp; keynotes
       <span class="sub">For event organisers — kit and enquiries</span></span>
   </a>
 
   <a class="btn" href="/start.html#work">
-    <span class="ico">🤝</span>
     <span>Executive coaching
       <span class="sub">For senior leaders, CHROs and CEOs</span></span>
   </a>
 
   <a class="btn" href="/about.html">
-    <span class="ico">🀄</span>
     <span>About Maureen
       <span class="sub">Thirty years, and one unexpected game</span></span>
   </a>
