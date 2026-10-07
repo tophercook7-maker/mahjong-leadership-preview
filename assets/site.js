@@ -281,7 +281,9 @@ function observeReveals(root){
 /* ---- nav solidify + parallax ---- */
 let ticking = false;
 function onScroll(){
-  document.getElementById('nav').classList.toggle('solid', window.scrollY > 40);
+  // Optional chaining, not a guard clause: /tap has no nav but DOES have
+  // [data-par] elements, so bailing early would kill the parallax too.
+  document.getElementById('nav')?.classList.toggle('solid', window.scrollY > 40);
   document.querySelectorAll('[data-par]').forEach(el => {
     el.style.transform = `translateY(${window.scrollY * parseFloat(el.dataset.par)}px) rotate(-16deg)`;
   });
