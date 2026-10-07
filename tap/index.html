@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Maureen A. Cahill — Tap Card</title>
-<meta name="description" content="Maureen A. Cahill — executive coach, speaker and author of Ancient Game. Modern Leadership. Save the contact, get the book, or enquire about speaking.">
+<meta name="description" content="Maureen A. Cahill — executive coach, speaker and author of Ancient Game. Modern Leadership. Save the contact, read the first chapter, or enquire about speaking.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://maureenacahill.com/tap">
 <meta name="theme-color" content="#0a1a11">
@@ -20,6 +20,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   [hidden]{display:none!important}
+  html,body{overflow-x:hidden}
   body{
     background:
       radial-gradient(120% 80% at 50% 0%, rgba(120,170,120,.16), transparent 58%),
@@ -29,25 +30,33 @@
     min-height:100vh; -webkit-font-smoothing:antialiased;
   }
   .serif{font-family:'Cormorant Garamond',Georgia,serif}
-  .wrap{max-width:430px;margin:0 auto;padding:30px 18px 46px}
-  html,body{overflow-x:hidden}
+  .wrap{max-width:430px;margin:0 auto;padding:28px 18px 46px;position:relative;z-index:1}
 
-  header{text-align:center;padding-bottom:22px}
-  .tiles{display:flex;justify-content:center;gap:9px;margin-bottom:16px}
-  .tiles img{height:62px;width:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,.5))}
-  h1{
-    font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
-    font-size:2rem;line-height:1.08;letter-spacing:-.01em;color:var(--ivory);
+  /* Her own drifting-tile backdrop, lifted from site.css so the card feels
+     like part of her site rather than a link list that happens to be green.
+     site.js fills #floaters and parallaxes them on scroll. */
+  .floaters{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .floaters i{position:absolute;width:64px;height:88px;border-radius:9px;
+    background:linear-gradient(#f7f2e7,#e6dcc6);
+    box-shadow:0 10px 26px rgba(0,0,0,.5), inset 0 -6px 0 #cdbfa2;opacity:.10;
+    font-family:'Cormorant Garamond',serif;color:#7a2a24;
+    display:flex;align-items:center;justify-content:center;font-size:38px}
+
+  header{text-align:center;padding-bottom:20px}
+  .tiles{display:flex;justify-content:center;gap:9px;margin-bottom:15px}
+  .tiles img{height:58px;width:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,.5));
+    opacity:0;transform:translateY(14px);animation:rise .7s ease-out forwards}
+  .tiles img:nth-child(2){animation-delay:.1s}
+  .tiles img:nth-child(3){animation-delay:.2s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .tiles img{animation:none;opacity:1;transform:none}
   }
-  /* Letter-spaced small caps overflow a 390px phone if left to one line —
-     clamp the size and let it wrap rather than pushing the page sideways. */
-  .role{
-    margin-top:9px;font-size:clamp(.60rem,2.6vw,.70rem);letter-spacing:.14em;
-    text-transform:uppercase;color:var(--gold);font-weight:500;
-    text-wrap:balance;
-  }
-  .tagline{margin-top:13px;font-size:.95rem;color:var(--muted);font-style:italic}
-  .tagline .serif{font-style:normal}
+  h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
+     font-size:2rem;line-height:1.08;letter-spacing:-.01em;color:var(--ivory)}
+  .role{margin-top:8px;font-size:clamp(.60rem,2.6vw,.70rem);letter-spacing:.14em;
+     text-transform:uppercase;color:var(--gold);font-weight:500}
+  .tagline{margin-top:12px;font-size:.95rem;color:var(--muted);font-style:italic}
 
   a.btn{
     display:flex;align-items:center;justify-content:space-between;gap:13px;width:100%;
@@ -58,48 +67,48 @@
     -webkit-tap-highlight-color:transparent;
   }
   a.btn:active{transform:scale(.988)}
-  /* No emoji. Her brand is Cormorant, gold and dark green — eight cartoon
-     glyphs read as a different company. A thin gold chevron says "tappable"
-     without saying it loudly. */
+  /* No emoji. Her site has none, and eight cartoon glyphs read as a different
+     company. A thin gold chevron says "tappable" quietly. */
   a.btn::after{content:"\203A";color:var(--gold);font-size:1.5rem;line-height:1;opacity:.55;flex:none}
-  a.gold::after,a.red::after{color:inherit;opacity:.5}
+  a.btn.noarrow::after{content:none}
   a.btn .sub{display:block;font-weight:400;font-size:.775rem;color:var(--muted);margin-top:2px}
   a.gold{background:linear-gradient(180deg,#d6b473,var(--gold));color:#2a1f08;border-color:#b3904f}
   a.gold .sub{color:#4a3a14}
+  a.gold::after{color:#2a1f08;opacity:.45}
   a.red{background:linear-gradient(180deg,#c43c33,var(--red));color:#fff;border-color:#9c2b24}
   a.red .sub{color:#f3d7d4}
+  a.red::after{color:#fff;opacity:.6}
 
-  .buyrow{display:flex;flex-direction:column;gap:11px;margin-bottom:11px}
-  .buyrow a{margin-bottom:0}
+  h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
+     font-size:1.12rem;color:var(--ivory);margin:26px 0 11px}
 
-  h2{
-    font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
-    font-size:1.12rem;color:var(--ivory);margin:26px 0 11px;
-  }
-  .book{
+  .book{display:flex;gap:15px;align-items:center;
     border:1px solid rgba(243,238,226,.14);border-radius:13px;
-    padding:15px 16px;background:rgba(10,26,17,.5);margin-bottom:11px;
-  }
-  .book p{font-size:.88rem;color:var(--muted);margin-top:7px}
-  .pill{
-    display:inline-block;font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;
-    color:var(--gold);border:1px solid rgba(200,162,95,.45);border-radius:999px;padding:4px 10px;
-  }
-  footer{
-    margin-top:26px;padding-top:16px;border-top:1px solid rgba(243,238,226,.12);
-    text-align:center;font-size:.74rem;color:var(--muted);
-  }
+    padding:15px;background:rgba(10,26,17,.55);margin-bottom:11px}
+  .book img{width:96px;height:auto;border-radius:4px;flex:none;
+    box-shadow:0 10px 24px rgba(0,0,0,.55)}
+  .book .t{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.1rem;
+    line-height:1.18;color:var(--ivory)}
+  .book .t em{color:var(--gold);font-style:normal;display:block}
+  .book p{font-size:.8rem;color:var(--muted);margin-top:7px;line-height:1.45}
+  .pill{display:inline-block;margin-top:9px;font-size:.63rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,162,95,.45);
+    border-radius:999px;padding:4px 10px}
+
+  footer{margin-top:26px;padding-top:16px;border-top:1px solid rgba(243,238,226,.12);
+    text-align:center;font-size:.74rem;color:var(--muted)}
   footer a{color:var(--gold);text-decoration:none}
 </style>
 </head>
 <body>
+<div class="floaters" id="floaters" aria-hidden="true"></div>
 <div class="wrap">
 
   <header>
     <div class="tiles">
-      <img src="/assets/tile-joker.png" alt="">
-      <img src="/assets/tile-dragon.png" alt="">
-      <img src="/assets/tile-two-wan.png" alt="">
+      <img src="/assets/tile-joker.png" alt="" width="155" height="243">
+      <img src="/assets/tile-dragon.png" alt="" width="155" height="244">
+      <img src="/assets/tile-two-wan.png" alt="" width="162" height="250">
     </div>
     <h1>Maureen A. Cahill</h1>
     <div class="role">Executive Coach · Speaker · Author</div>
@@ -107,71 +116,85 @@
   </header>
 
   <a class="btn gold" href="/assets/maureen-a-cahill.vcf">
-    <span>Save my contact
-      <span class="sub">Straight into your phone</span></span>
+    <span>Save my contact<span class="sub">Straight into your phone</span></span>
   </a>
 
   <a class="btn" href="mailto:maureen@maureenacahill.com">
-    <span>Email me
-      <span class="sub">maureen@maureenacahill.com</span></span>
+    <span>Email me<span class="sub">maureen@maureenacahill.com</span></span>
   </a>
 
   <h2>The book</h2>
 
   <div class="book">
-    <div class="serif" style="font-size:1.18rem;color:var(--ivory);line-height:1.2">
-      Ancient Game.<br><span style="color:var(--gold)">Modern Leadership.</span>
+    <img src="/assets/book-cover-tap.jpg" alt="Cover of Ancient Game. Modern Leadership." width="520" height="783">
+    <div>
+      <div class="t serif">Ancient Game.<em>Modern Leadership.</em></div>
+      <p>Ten leadership parallels drawn from the Mahjong table.</p>
+      <span class="pill" id="countdown" data-prelaunch-cta>Out 27 October</span>
     </div>
-    <p>Ten leadership parallels drawn from the Mahjong table. <span data-prelaunch-cta><span class="pill">Out 27 October</span></span></p>
   </div>
 
-  <!-- Before launch these are hidden and the launch-list button shows instead.
-       On launch day the two URLs in assets/site.js fill in and this flips
-       itself — including on every card already in someone's hand. -->
-  <div class="buyrow">
-    <a class="btn red" data-buy hidden>Buy the book</a>
-  </div>
+  <!-- Flips itself on launch day: when the two URLs in assets/site.js are
+       filled in, this appears and the launch-list button disappears —
+       including on every card already in someone's hand. -->
+  <a class="btn red" data-buy hidden>Buy the book</a>
+
+  <!-- The first chapter is her list-building engine: site.js intercepts the
+       click, asks for an email, then releases the PDF. This is the one thing
+       worth tapping at a speaking event. ⚠️ site.js OVERWRITES this link's
+       text, so it gets no sub-line — and no chevron, since it adds its own. -->
+  <a class="btn gold noarrow" data-free-chapter href="/book.html">Read the first chapter</a>
 
   <a class="btn" href="/book.html">
-    <span>About the book
-      <span class="sub">What it's about, and who it's for</span></span>
+    <span>About the book<span class="sub">What it's about, and who it's for</span></span>
   </a>
 
-  <a class="btn gold" href="/launch.html" data-prelaunch-cta>
-    <span>Tell me when it's out
-      <span class="sub">Join the launch list</span></span>
+  <a class="btn" href="/launch.html" data-prelaunch-cta>
+    <span>Tell me when it's out<span class="sub">Join the launch list</span></span>
   </a>
 
   <a class="btn" href="/resources.html">
-    <span>Reader resources
-      <span class="sub">Companion material for the book</span></span>
+    <span>Reader resources<span class="sub">Companion material for the book</span></span>
   </a>
 
   <h2>Work with me</h2>
 
   <a class="btn" href="/start.html">
-    <span>Speaking &amp; keynotes
-      <span class="sub">For event organisers — kit and enquiries</span></span>
+    <span>Speaking &amp; keynotes<span class="sub">For event organisers — kit and enquiries</span></span>
   </a>
 
   <a class="btn" href="/start.html#work">
-    <span>Executive coaching
-      <span class="sub">For senior leaders, CHROs and CEOs</span></span>
+    <span>Executive coaching<span class="sub">For senior leaders, CHROs and CEOs</span></span>
   </a>
 
   <a class="btn" href="/about.html">
-    <span>About Maureen
-      <span class="sub">Thirty years, and one unexpected game</span></span>
+    <span>About Maureen<span class="sub">Thirty years, and one unexpected game</span></span>
+  </a>
+
+  <a class="btn" href="https://www.linkedin.com/in/maureencahill" target="_blank" rel="noopener noreferrer">
+    <span>LinkedIn<span class="sub">Connect with me</span></span>
   </a>
 
   <footer>
-    <a href="https://maureenacahill.com/">maureenacahill.com</a><br>
+    <a href="https://maureenacahill.com/">maureenacahill.com</a>
     <span data-bookstores hidden style="display:block;margin-top:8px;font-size:.7rem">
       Booksellers: distributed through IngramSpark.
     </span>
   </footer>
 
 </div>
+
+<script>
+/* Keeps itself honest with no one editing the page:
+   "12 days" → "Out tomorrow" → "Out now". Launch 27 Oct, US Central. */
+(function(){
+  var el = document.getElementById('countdown');
+  if (!el) return;
+  var days = Math.ceil((new Date('2026-10-27T00:00:00-05:00') - new Date()) / 86400000);
+  el.textContent = days > 1 ? 'Out 27 October · ' + days + ' days'
+                 : days === 1 ? 'Out tomorrow' : 'Out now';
+})();
+</script>
 <script src="/assets/site.js" defer></script>
 </body>
 </html>

@@ -55,7 +55,9 @@ const READER_KEY  = 'agml_reader';
    Drop the PDF in assets/resources/ and put its path here. While this is
    empty the button collects the email instead of promising a file we
    can't yet deliver. One line to flip on the day Maureen sends it.   */
-const FREE_CHAPTER = 'assets/resources/Ancient-Game-Modern-Leadership-Sample-Chapter.pdf';
+// Absolute, not relative: /tap/ is a subdirectory, and a relative path
+// resolves to /tap/assets/... which 404s. Root-relative works everywhere.
+const FREE_CHAPTER = '/assets/resources/Ancient-Game-Modern-Leadership-Sample-Chapter.pdf';
 
 /* ---- Google Analytics (punch list 5.1) ----
    Paste the GA4 Measurement ID (looks like 'G-XXXXXXXXXX') from
