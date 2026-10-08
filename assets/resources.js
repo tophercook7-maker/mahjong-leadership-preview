@@ -48,7 +48,11 @@ function buildLibrary(){
   if (!isUnlocked()){ track('reader-gate-view'); return; }
   gate.hidden = true;
   lib.hidden  = false;
-  if (new URLSearchParams(location.search).get('welcome')) document.getElementById('welcome').hidden = false;
+  if (new URLSearchParams(location.search).get('welcome')){
+    document.getElementById('welcome').hidden = false;
+    // so the bookmark they're told to make is the clean permanent link
+    try { history.replaceState(null, '', READER_LINK.replace(/^https?:\/\/[^/]+/, '')); } catch(_){}
+  }
   track('reader-library-view');
 
   // frameworks — LESSONS (site.js) gives the ten parallels, FRAMEWORKS (game.js) says which are designed

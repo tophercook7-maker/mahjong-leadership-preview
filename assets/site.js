@@ -136,7 +136,9 @@ function openChapterGate(btn){
     return;
   }
   track('free-chapter-gate');
-  const band = btn.closest('.cta-band') || btn.parentElement;
+  // After the button's band where there is one (book page); otherwise straight
+  // after the button. parentElement put it under the footer on /tap/.
+  const band = btn.closest('.cta-band') || btn;
   const gate = document.createElement('div');
   gate.id = 'chapter-gate';
   gate.className = 'capture chapter-gate';
@@ -184,13 +186,14 @@ function submitChapterGate(e){
   // every other form feeding the same list.
   mlSubscribe('reader', { email, first, last, source: 'Sample chapter — book page' })
     .then(ok => {
-      if (!ok){
-        btn.disabled = false; btn.textContent = original;
-        err.hidden = false;
-        return;
+      // A failed request (MailerLite down, a blocker eating the call) still
+      // hands over the chapter, as promised above — the reader did their part.
+      if (ok){
+        try { localStorage.setItem(READER_KEY, '1'); } catch(_){}
+        track('free-chapter-captured');
+      } else {
+        track('free-chapter-capture-failed');
       }
-      try { localStorage.setItem(READER_KEY, '1'); } catch(_){}
-      track('free-chapter-captured');
       wrap.classList.add('sent');
       wrap.innerHTML = `
         <div class="form-ok show">
@@ -200,9 +203,8 @@ function submitChapterGate(e){
             <a class="btn btn-gold" href="${FREE_CHAPTER}" download data-chapter-dl>
               Download the chapter ↓</a>
           </p>
-          <p class="note" style="margin-top:12px">Check your email too — there's a confirmation
-             link from Maureen A. Cahill (subject: “Confirmation email”) to click before the
-             launch updates start arriving. Worth a look in spam if you don't see it.</p>
+          <p class="note" style="margin-top:12px">If an email from Maureen A. Cahill asks you
+             to confirm, click the link — that's how you'll hear when the book is out.</p>
         </div>`;
       const dl = wrap.querySelector('[data-chapter-dl]');
       if (dl) setTimeout(() => dl.click(), 350);
@@ -360,11 +362,15 @@ function splitName(full){
 }
 
 /* POST to MailerLite. Resolves true on success. */
-function mlSubscribe(list, { email, first, last, source }){
+function mlSubscribe(list, { email, first, last, source, extra }){
   const body = new URLSearchParams();
   body.set('fields[email]', email);
   if (first) body.set('fields[name]', first);
   if (last)  body.set('fields[last_name]', last);
+  // Anything else the form asked for (organisation, what they want). Without
+  // this the Work With Me form collected both and threw them away.
+  // MailerLite ignores a key it has no field for, so this can't break a signup.
+  Object.entries(extra || {}).forEach(([k, v]) => { if (v) body.set(`fields[${k}]`, v); });
   body.set('ml-submit', '1');
   body.set('anticsrf', 'true');
   track('signup:' + (source || list));
@@ -386,6 +392,10 @@ function submitCapture(e){
   const data  = new FormData(form);
   const email = (data.get('Email') || data.get('email') || '').trim();
   const { first, last } = splitName(data.get('Name') || data.get('name'));
+  const extra = {
+    company:       (data.get('Organization') || '').trim(),
+    interested_in: (data.get('Interested in') || '').trim()
+  };
 
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
     const inp = form.querySelector('input[type=email]');
@@ -397,7 +407,7 @@ function submitCapture(e){
   const original = btn ? btn.textContent : '';
   if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
 
-  mlSubscribe(list, { email, first, last, source }).then(ok => {
+  mlSubscribe(list, { email, first, last, source, extra }).then(ok => {
     if (ok){
       wrap.classList.add('sent');
       const done = wrap.querySelector('.form-ok');
@@ -442,7 +452,7 @@ function renderReaderForm(host){
       <div class="fields" style="margin-top:12px">
         <button type="submit" class="btn btn-red" style="flex:1">Send Me the Reader Resources</button>
       </div>
-      <p class="note">We'll email you a confirmation link \u2014 it comes from Maureen A. Cahill with the subject \u201cConfirmation email\u201d, so check spam if it doesn't appear. Click it and your resource library opens, plus a link you can return to any time.</p>
+      <p class="note">The library opens as soon as you sign up. If an email from Maureen A. Cahill asks you to confirm, click the link so you hear when new resources are added.</p>
       <p class="form-err" hidden>Please add your first name, last name, and a valid email address.</p>
     </form>`;
   host.querySelector('form').addEventListener('submit', submitReaderForm);
@@ -471,6 +481,12 @@ function submitReaderForm(e){
     if (ok){
       // remember them locally so a returning reader isn't re-gated on this device
       try { localStorage.setItem(READER_KEY, '1'); } catch(_){}
+      // On the library page itself, open the library now. Nothing is emailed
+      // automatically, so the page must never wait on an email to deliver.
+      if (document.getElementById('library')){
+        location.replace(READER_LINK.replace(/^https?:\/\/[^/]+/, '') + '&welcome=1');
+        return;
+      }
       wrap.classList.add('sent');
       const done = wrap.querySelector('.form-ok');
       if (done){
@@ -478,7 +494,7 @@ function submitReaderForm(e){
       } else {
         const p = document.createElement('div');
         p.className = 'form-ok show';
-        p.innerHTML = `\u2713 Check your email \u2014 we've sent <strong>${email}</strong> a confirmation link from Maureen A. Cahill, subject \u201cConfirmation email\u201d. Click it and your resources open right up. Look in spam if it isn't there.`;
+        p.innerHTML = `\u2713 You're in, ${first}. <a href="${READER_LINK}">Open the reader library \u2192</a> \u2014 bookmark it and you can come back any time.`;
         wrap.appendChild(p);
       }
     } else {

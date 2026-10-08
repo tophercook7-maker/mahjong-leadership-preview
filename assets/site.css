@@ -423,4 +423,7 @@ footer .brand{display:block;margin-bottom:10px;font-size:1.35rem;color:var(--ivo
 .chapter-gate .note{font-size:.78rem;color:var(--muted);margin-top:10px;text-align:center}
 .chapter-gate .form-err{color:#e9917f;font-size:.82rem;margin-top:10px;text-align:center}
 .chapter-gate .form-ok{text-align:center;color:var(--ivory)}
+.capture.sent .form-ok .note{display:block}   /* the hide-on-success rule is for the form's own note */
+.form-ok .btn,.form-ok .note{font-family:'Inter',system-ui,sans-serif;font-style:normal}
+.form-ok a:not(.btn){color:var(--gold);text-decoration:underline;text-underline-offset:3px}
 @media(max-width:560px){ .chapter-gate{padding:16px 14px} }

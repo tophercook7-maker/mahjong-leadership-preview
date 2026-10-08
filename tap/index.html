@@ -6,7 +6,7 @@
 <title>Maureen A. Cahill — Tap Card</title>
 <meta name="description" content="Maureen A. Cahill — executive coach, speaker and author of Ancient Game. Modern Leadership. Save the contact, read the first chapter, or enquire about speaking.">
 <meta name="robots" content="noindex, follow">
-<link rel="canonical" href="https://maureenacahill.com/tap">
+<link rel="canonical" href="https://maureenacahill.com/tap/">
 <meta name="theme-color" content="#0a1a11">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +21,7 @@
   *{box-sizing:border-box;margin:0;padding:0}
   [hidden]{display:none!important}
   html,body{overflow-x:hidden}
+  html{background:var(--felt0)}   /* iOS overscroll shows this, not white */
   body{
     background:
       radial-gradient(120% 80% at 50% 0%, rgba(120,170,120,.16), transparent 58%),
@@ -94,6 +95,27 @@
   .pill{display:inline-block;margin-top:9px;font-size:.63rem;letter-spacing:.14em;
     text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,162,95,.45);
     border-radius:999px;padding:4px 10px}
+
+  /* The free-chapter form site.js drops in under the gold button. It
+     brings no styles of its own here (site.css isn't loaded on /tap/). */
+  .chapter-gate{border:1px solid rgba(200,162,95,.4);border-radius:13px;
+    padding:16px 15px;margin:-2px 0 13px;background:rgba(10,26,17,.6)}
+  .chapter-gate .gate-lead{font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:1.25rem;color:var(--ivory);margin-bottom:10px;text-align:center}
+  .chapter-gate .fields{display:flex;gap:8px}
+  .chapter-gate input{flex:1;min-width:0;font:inherit;font-size:16px;color:var(--ink);
+    background:rgba(243,238,226,.06);border:1px solid rgba(243,238,226,.2);
+    border-radius:10px;padding:12px 13px}
+  .chapter-gate input::placeholder{color:#8f887a}
+  .chapter-gate input:focus{outline:none;border-color:var(--gold)}
+  .chapter-gate button{flex:1;font:inherit;font-weight:500;font-size:1rem;color:#fff;
+    min-height:50px;border-radius:10px;border:1px solid #9c2b24;cursor:pointer;
+    background:linear-gradient(180deg,#c43c33,var(--red))}
+  .chapter-gate button:disabled{opacity:.7}
+  .chapter-gate .note{font-size:.75rem;color:var(--muted);margin-top:10px;text-align:center;line-height:1.5}
+  .chapter-gate .form-err{color:#e9917f;font-size:.8rem;margin-top:8px;text-align:center}
+  .chapter-gate .form-ok{text-align:center;color:var(--ink);font-size:.95rem}
+  .chapter-gate .form-ok a.btn{margin:0;text-align:left}
 
   footer{margin-top:26px;padding-top:16px;border-top:1px solid rgba(243,238,226,.12);
     text-align:center;font-size:.74rem;color:var(--muted)}
