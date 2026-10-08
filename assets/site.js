@@ -381,6 +381,30 @@ function mlSubscribe(list, { email, first, last, source, extra }){
   }).then(r => r.json()).then(d => !!(d && d.success)).catch(() => false);
 }
 
+/* ---- enquiry alert ----
+   A Work With Me enquiry used to land only in a MailerLite group nobody
+   opens, while the page promised "I'll be in touch soon". Each one is now
+   also emailed straight to Maureen (FormSubmit, free). Reply-to is the
+   enquirer, so answering is one click. Fire-and-forget: the MailerLite
+   result still decides what the visitor sees.
+   ⚠️ Testing through the real form emails Maureen. Don't.                 */
+const ENQUIRY_TO = 'maureen@maureenacahill.com';
+
+function sendEnquiryAlert({ name, email, company, interest }){
+  const fd = new FormData();
+  fd.append('Name', name || '');
+  fd.append('Email', email);
+  fd.append('Organization', company || '—');
+  fd.append('Interested in', interest || '—');
+  fd.append('_subject', `New enquiry from your website — ${name || email}`);
+  fd.append('_replyto', email);
+  fd.append('_template', 'table');
+  fd.append('_captcha', 'false');
+  return fetch(`https://formsubmit.co/ajax/${ENQUIRY_TO}`, {
+    method: 'POST', headers: { 'Accept': 'application/json' }, body: fd
+  }).catch(() => {});
+}
+
 function submitCapture(e){
   e.preventDefault();
   const form   = e.target;
@@ -406,6 +430,11 @@ function submitCapture(e){
 
   const original = btn ? btn.textContent : '';
   if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
+
+  if (list === 'work'){
+    sendEnquiryAlert({ name: [first, last].filter(Boolean).join(' '), email,
+                       company: extra.company, interest: extra.interested_in });
+  }
 
   mlSubscribe(list, { email, first, last, source, extra }).then(ok => {
     if (ok){
