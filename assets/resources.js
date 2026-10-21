@@ -8,8 +8,9 @@
      FRAMEWORKS in game.js (the tile board picks it up too), then run
      tools/build-frameworks-zip.sh so "Download All" includes it.
    • the bonus chapter: set BONUS.file (and its description).
-   • worksheets: set WORKSHEETS[n].file — one printer-friendly PDF,
-     one fillable PDF.
+   • worksheets: one PDF per parallel at
+     assets/resources/Put-It-Into-Play-Parallel-NN.pdf, plus the combined
+     Put-It-Into-Play-All-Ten-Worksheets.pdf.
    ============================================================ */
 const BONUS = {
   title: 'Sample Chapter \u2014 Parallel Six: Master the Art of the Pivot',
@@ -17,10 +18,15 @@ const BONUS = {
   file:  'assets/resources/Ancient-Game-Modern-Leadership-Sample-Chapter.pdf'
 };
 
-const WORKSHEETS = [
-  { title: 'Put It into Play — printer-friendly', desc: 'All ten worksheets in one PDF, formatted to print.', file: '' },
-  { title: 'Put It into Play — fillable',         desc: 'The same worksheets as a fillable PDF you can complete on screen and save.', file: '' }
-];
+// Maureen's ten worksheets (sent 21 Oct 2026) — print-ready PDFs, 3 pages each.
+// Each one is named for its parallel's leadership model, from the worksheet itself.
+const WS_MODELS = ['CURATE','RULES','RITUAL','OBSERVE','RESET','PIVOT','SHIFT','WIN','GROW','CONNECT'];
+const WS_DIR = 'assets/resources/';
+const WORKSHEETS_ALL = {
+  title: 'All Ten Worksheets',
+  desc:  'Every Put It into Play worksheet in one PDF, ready to print.',
+  file:  WS_DIR + 'Put-It-Into-Play-All-Ten-Worksheets.pdf'
+};
 
 function isUnlocked(){
   const q = new URLSearchParams(location.search);
@@ -66,7 +72,14 @@ function buildLibrary(){
   else if (ready < 10){ all.textContent = `Download All Available Frameworks ↓`; note.textContent = `${ready} of 10 designed so far — the rest are on their way.`; }
 
   document.getElementById('bonusGrid').innerHTML = item({ title: BONUS.title, desc: BONUS.desc, file: BONUS.file, track: 'download-bonus-chapter' });
-  document.getElementById('wsGrid').innerHTML = WORKSHEETS.map((w, i) => item({ ...w, track: `download-worksheets-${i ? 'fillable' : 'print'}` })).join('');
+  document.getElementById('wsGrid').innerHTML =
+    item({ ...WORKSHEETS_ALL, track: 'download-worksheets-all' }) +
+    LESSONS.map(L => item({
+      n: L.n, title: L.t,
+      desc: `Leadership Model: ${WS_MODELS[L.n - 1]}. Reflection questions and one action to take this week.`,
+      file: `${WS_DIR}Put-It-Into-Play-Parallel-${String(L.n).padStart(2, '0')}.pdf`,
+      track: `download-worksheet-${L.n}`
+    })).join('');
 
   // count every download
   lib.querySelectorAll('[data-track]').forEach(a => a.addEventListener('click', () => track(a.dataset.track)));
