@@ -25,9 +25,12 @@ const LESSONS = [
 ];
 
 /* ---- launch switch ----
-   Flip to true on launch day: the nav's "Join the Launch List" becomes
-   "Reader Resources", and launch.html re-titles itself "Stay Connected". */
-const BOOK_LAUNCHED = false;
+   Turns itself on at midnight Central on launch day, so nothing has to be
+   pushed at 12:01. From then on every "Join the Launch List" reads "Join Us"
+   (Nancy, 22 Oct), the buy buttons appear and the pre-launch asks hide.
+   Resources has its own nav tab now, so the CTA no longer becomes it.     */
+const LAUNCH_DATE = new Date('2026-10-27T00:00:00-05:00');
+const BOOK_LAUNCHED = new Date() >= LAUNCH_DATE;
 
 /* Where the book can actually be bought. Empty until Maureen has the Amazon
    link — and while it is empty NOTHING changes on the page, so this can sit
@@ -41,7 +44,7 @@ const BOOK_LAUNCHED = false;
    button appears; leave it empty and it stays hidden. Adding a fourth is one
    more line — no layout work on launch morning.                            */
 const BUY_LINKS = [
-  { label: 'Buy on Amazon',      url: '' },
+  { label: 'Buy on Amazon',      url: 'https://www.amazon.com/dp/B0HNTCZZHF' },
   { label: 'Buy on Bookshop.org', url: '' }
 ];
 
@@ -219,16 +222,19 @@ function submitChapterGate(e){
 function applyLaunchState(){
   applyBuyLink();
   if (!BOOK_LAUNCHED) return;
-  document.querySelectorAll('a[href="launch.html"].nav-cta').forEach(a => { a.textContent = 'Reader Resources'; a.href = 'resources.html'; });
+  document.querySelectorAll('a[href$="launch.html"]').forEach(a => {
+    if (/Join the Launch List/.test(a.textContent)) a.textContent = a.textContent.replace('Join the Launch List', 'Join Us');
+  });
+  if (document.title.startsWith('Join the Launch List')) document.title = document.title.replace('Join the Launch List', 'Join Us');
   document.querySelectorAll('[data-prelaunch]').forEach(el => el.hidden = true);
   document.querySelectorAll('[data-launched]').forEach(el => el.hidden = false);
 }
 
-/* Buy buttons appear only once there is somewhere to send people. Deliberately
-   independent of BOOK_LAUNCHED: if the retailer listing goes live early, the
-   link can be switched on without changing anything else. */
+/* Buy buttons appear only once there is somewhere to send people, and not
+   before launch day: the Amazon listing went live early, but launch-day sales
+   are the ones that count for rank, so the buttons wait for LAUNCH_DATE. */
 function applyBuyLink(){
-  const live = BUY_LINKS.filter(b => b.url);
+  const live = BOOK_LAUNCHED ? BUY_LINKS.filter(b => b.url) : [];
   const slots = document.querySelectorAll('[data-buy]');
   if (!slots.length) return;
 
