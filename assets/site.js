@@ -45,7 +45,8 @@ const BOOK_LAUNCHED = new Date() >= LAUNCH_DATE;
    more line — no layout work on launch morning.                            */
 const BUY_LINKS = [
   { label: 'Buy on Amazon',      url: 'https://www.amazon.com/dp/B0HNTCZZHF' },
-  { label: 'Buy on Bookshop.org', url: '' }
+  { label: 'Buy on Barnes & Noble', url: 'https://www.barnesandnoble.com/w/ancient-game-modern-leadership-maureen-a-cahill/1151774540' },
+  { label: 'Buy on Bookshop.org', url: 'https://bookshop.org/p/books/ancient-game-modern-leadership-timeless-lessons-from-the-mahjong-table-maureen-a-cahill/a248a484fc2e7039?ean=9798996832101' }
 ];
 
 /* ---- reader resources ----
