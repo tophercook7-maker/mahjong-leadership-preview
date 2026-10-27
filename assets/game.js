@@ -8,9 +8,18 @@
    add one line to FRAMEWORKS below, keyed by parallel number.
    The tile picks it up automatically — nothing else to change.
    ============================================================ */
+// 26 Oct: all ten designed leadership models. file = web image (tile lightbox), pdf = print-quality download.
 const FRAMEWORKS = {
-  1: { name: 'CURATE', file: 'assets/frameworks/01-curate-the-environment.png' }
-  // 2: { name: '……', file: 'assets/frameworks/02-….png' },
+  1: { name: 'CURATE', file: 'assets/frameworks/01-curate.png', pdf: 'assets/frameworks/pdf/Leadership-Model-01-CURATE.pdf' },
+  2: { name: 'RULES', file: 'assets/frameworks/02-rules.png', pdf: 'assets/frameworks/pdf/Leadership-Model-02-RULES.pdf' },
+  3: { name: 'RITUAL', file: 'assets/frameworks/03-ritual.png', pdf: 'assets/frameworks/pdf/Leadership-Model-03-RITUAL.pdf' },
+  4: { name: 'OBSERVE', file: 'assets/frameworks/04-observe.png', pdf: 'assets/frameworks/pdf/Leadership-Model-04-OBSERVE.pdf' },
+  5: { name: 'RESET', file: 'assets/frameworks/05-reset.png', pdf: 'assets/frameworks/pdf/Leadership-Model-05-RESET.pdf' },
+  6: { name: 'PIVOT', file: 'assets/frameworks/06-pivot.png', pdf: 'assets/frameworks/pdf/Leadership-Model-06-PIVOT.pdf' },
+  7: { name: 'SHIFT', file: 'assets/frameworks/07-shift.png', pdf: 'assets/frameworks/pdf/Leadership-Model-07-SHIFT.pdf' },
+  8: { name: 'WIN', file: 'assets/frameworks/08-win.png', pdf: 'assets/frameworks/pdf/Leadership-Model-08-WIN.pdf' },
+  9: { name: 'GROW', file: 'assets/frameworks/09-grow.png', pdf: 'assets/frameworks/pdf/Leadership-Model-09-GROW.pdf' },
+  10: { name: 'CONNECT', file: 'assets/frameworks/10-connect.png', pdf: 'assets/frameworks/pdf/Leadership-Model-10-CONNECT.pdf' }
 };
 
 let opened = 0;
@@ -126,7 +135,7 @@ function openFramework(L, fw){
   img.src = fw.file;
   img.alt = `The ${fw.name} leadership model — Parallel ${L.n}, ${L.t}`;
   box.querySelector('figcaption').innerHTML =
-    `Parallel ${L.n} · ${L.t} <a href="${fw.file}" download>Download ↓</a>`;
+    `Parallel ${L.n} · ${L.t} <a href="${fw.pdf || fw.file}" download>Download ↓</a>`;
   box.classList.add('open');
   document.body.style.overflow = 'hidden';
   box.querySelector('.fw-close').focus();

@@ -64,7 +64,7 @@ function buildLibrary(){
   // frameworks — LESSONS (site.js) gives the ten parallels, FRAMEWORKS (game.js) says which are designed
   document.getElementById('fwGrid').innerHTML = LESSONS.map(L => {
     const fw = FRAMEWORKS[L.n];
-    return item({ n: L.n, title: L.t, desc: L.tip, file: fw ? fw.file : '', track: `download-framework-${L.n}` });
+    return item({ n: L.n, title: L.t, desc: L.tip, file: fw ? (fw.pdf || fw.file) : '', track: `download-framework-${L.n}` });
   }).join('');
   const ready = LESSONS.filter(L => FRAMEWORKS[L.n]).length;
   const all = document.getElementById('dlAll'), note = document.getElementById('dlAllNote');
